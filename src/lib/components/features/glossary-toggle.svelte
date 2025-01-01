@@ -14,23 +14,29 @@
       class:-translate-x-[calc(100%-2.5rem)]={!isOpen}
     >
       <div
-        class="absolute top-1/2 -translate-y-1/2 transition-opacity duration-300 right-4"
-        class:opacity-0={isOpen}
-        class:opacity-100={!isOpen}
-      >
-        <span
-          class="block -rotate-180 font-medium text-black/70"
-          style="writing-mode: vertical-rl;"
-        >
-          GLOSSAR
-        </span>
-      </div>
-
-      <div
-        class="w-90 bg-primary shadow-lg p-3 rounded-r-lg h-[50vh] overflow-y-auto"
+        class="w-90 relative shadow-lg p-3 rounded-r-lg h-[50vh] overflow-y-auto"
       >
         <div
-          class="transition-opacity duration-300"
+          class="absolute top-1/2 -translate-y-1/2 transition-opacity duration-300 right-4 z-20"
+          class:opacity-0={isOpen}
+          class:opacity-100={!isOpen}
+        >
+          <span
+            class="block -rotate-180 font-medium text-black/70"
+            style="writing-mode: vertical-rl;"
+          >
+            GLOSSAR
+          </span>
+        </div>
+
+        <div
+          class="absolute inset-0 bg-primary transition-opacity duration-300 rounded-r-lg"
+          class:opacity-90={isOpen}
+          class:opacity-100={!isOpen}
+        ></div>
+
+        <div
+          class="relative z-10 transition-opacity duration-300"
           class:opacity-0={!isOpen}
           class:opacity-100={isOpen}
         >
