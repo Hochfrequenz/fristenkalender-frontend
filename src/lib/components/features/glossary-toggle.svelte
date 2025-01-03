@@ -14,7 +14,7 @@
       class:-translate-x-[calc(100%-2.5rem)]={!isOpen}
     >
       <div
-        class="w-90 relative shadow-lg p-3 rounded-r-lg h-[50vh] overflow-y-auto"
+        class="w-90 relative shadow-lg p-3 rounded-r-lg h-[40vh] overflow-y-auto"
       >
         <div
           class="absolute top-1/2 -translate-y-1/2 transition-opacity duration-300 right-4 z-20"
@@ -36,22 +36,56 @@
         ></div>
 
         <div
-          class="relative z-10 transition-opacity duration-300"
+          class="flex flex-col justify-center relative z-10 transition-opacity duration-300 h-full"
           class:opacity-0={!isOpen}
           class:opacity-100={isOpen}
         >
-          <div class="p-2">
-            1 WT - 1. Werktag im Monat (nach BDEW)<br />
-            3LWT - 3. letzter Werktag im Monat (nach BDEW)<br />
-            MaBiS - Marktregeln für die Durchführung der Bilanzkreisabrechnung Strom<br
-            />
-            GPKE - Geschäftsprozesse zur Kundenbelieferung mit Elektrizität<br
-            />
-            GeLi Gas - Geschäftsprozesse Lieferantenwechsel Gas<br />
-            KOV - Kooperationsvereinbarung Gas<br />
-            BKV - Bilanzkreisverantwortlicher<br />
-            MGV - Marktgebietsverantwortlicher<br />
-            ÜNB - Übertragungsnetzbetreiber
+          <div class="p-4">
+            <table class="w-full">
+              <tbody>
+                <tr>
+                  <td class="py-2 pr-4 align-top font-medium">1 WT</td>
+                  <td class="py-2">1. Werktag im Monat (nach BDEW)</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-4 align-top font-medium">3LWT</td>
+                  <td class="py-2">3. letzter Werktag im Monat (nach BDEW)</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-4 align-top font-medium">MaBiS</td>
+                  <td class="py-2"
+                    >Marktregeln für die Durchführung der Bilanzkreisabrechnung
+                    Strom</td
+                  >
+                </tr>
+                <tr>
+                  <td class="py-2 pr-4 align-top font-medium">GPKE</td>
+                  <td class="py-2"
+                    >Geschäftsprozesse zur Kundenbelieferung mit Elektrizität</td
+                  >
+                </tr>
+                <tr>
+                  <td class="py-2 pr-4 align-top font-medium">GeLi Gas</td>
+                  <td class="py-2">Geschäftsprozesse Lieferantenwechsel Gas</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-4 align-top font-medium">KOV</td>
+                  <td class="py-2">Kooperationsvereinbarung Gas</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-4 align-top font-medium">BKV</td>
+                  <td class="py-2">Bilanzkreisverantwortlicher</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-4 align-top font-medium">MGV</td>
+                  <td class="py-2">Marktgebietsverantwortlicher</td>
+                </tr>
+                <tr>
+                  <td class="py-2 pr-4 align-top font-medium">ÜNB</td>
+                  <td class="py-2">Übertragungsnetzbetreiber</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
