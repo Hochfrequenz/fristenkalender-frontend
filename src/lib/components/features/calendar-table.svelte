@@ -1,14 +1,4 @@
 <script context="module" lang="ts">
-  import type JQueryAjaxSettings from "jquery";
-
-  declare global {
-    interface Window {
-      $: {
-        ajax: (settings: JQueryAjaxSettings) => Promise<unknown>;
-      };
-    }
-  }
-
   type CacheData = Array<string>;
   const dataCache: Record<string, CacheData> = {};
 </script>
@@ -42,21 +32,22 @@
         ? `https://fristenkalender.azurewebsites.net/api/GenerateAllFristen/${selectedYear}`
         : `https://fristenkalender.azurewebsites.net/api/GenerateFristenForType/${selectedYear}/${selectedType}`;
 
-    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(requestUrl)}`;
-
     try {
-      const response = await window.$.ajax({
-        url: proxyUrl,
-        type: "GET",
-        cache: true,
+      const response = await fetch(requestUrl, {
+        method: "GET",
+        mode: "cors",
       });
 
-      const typedResponse = response as CacheData;
-      dataCache[cacheKey] = typedResponse;
-      return typedResponse;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      dataCache[cacheKey] = data;
+      return data;
     } catch (error) {
       console.error("Error fetching data:", error);
-      throw new Error("Failed to fetch data");
+      throw error;
     }
   }
 
@@ -129,7 +120,7 @@
     try {
       const data = await fetchData();
       entries = processData(data);
-    } catch (error: unknown) {
+    } catch (error) {
       console.error("Error in loadData:", error);
       entries = [];
     } finally {
@@ -148,7 +139,7 @@
       <span>Lade Fristenkalender ...</span>
     </div>
   {:else if entries.length === 0}
-    <span> Keine Fristen für den ausgewählten Zeitraum gefunden. </span>
+    <span>Keine Fristen für den ausgewählten Zeitraum gefunden.</span>
   {:else}
     <div class="overflow-auto flex-1 min-h-0">
       <table class="w-full text-left">
@@ -156,16 +147,19 @@
           <tr class="text-black/50">
             <th
               class="pb-4 font-normal relative before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.5 before:bg-secondary"
-              >Datum</th
             >
+              Datum
+            </th>
             <th
               class="pb-4 font-normal relative before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.5 before:bg-secondary"
-              >Werktag</th
             >
+              Werktag
+            </th>
             <th
               class="pb-4 font-normal relative before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.5 before:bg-secondary"
-              >Beschreibung</th
             >
+              Beschreibung
+            </th>
           </tr>
         </thead>
         <tbody>
