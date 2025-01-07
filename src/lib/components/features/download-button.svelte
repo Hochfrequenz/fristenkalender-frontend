@@ -76,7 +76,7 @@
   >
     <IconDownload />
     {#if isDownloading}
-      Bitte warten ({cooldownRemaining}s)
+      Download gestartet ({cooldownRemaining}s)
     {:else}
       Download Jahreskalender
     {/if}
