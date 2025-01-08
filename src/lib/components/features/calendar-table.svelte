@@ -1,8 +1,3 @@
-<script context="module" lang="ts">
-  type CacheData = Array<string>;
-  const dataCache: Record<string, CacheData> = {};
-</script>
-
 <script lang="ts">
   import type { CalendarEntry } from "$lib/types/calendar-entry";
   import type { MonthValue } from "$lib/types/calendar-month";
@@ -13,45 +8,32 @@
   export let selectedType: TypeValue;
 
   let entries: CalendarEntry[] = [];
-  let isLoading = false;
+  let isLoading = true;
 
   // split <number> and <string> ("WT"/"LWT")
   function formatWorkday(workday: string): string {
     return workday.replace(/(\d+)([a-zA-Z]+)/g, "$1 $2");
   }
 
-  async function fetchData(): Promise<CacheData> {
-    const cacheKey = `${selectedYear}-${selectedType}`;
-
-    if (dataCache[cacheKey]) {
-      return dataCache[cacheKey];
-    }
-
+  async function fetchData(): Promise<string[]> {
     const requestUrl =
       selectedType === "ALL"
         ? `https://fristenkalender.azurewebsites.net/api/GenerateAllFristen/${selectedYear}`
         : `https://fristenkalender.azurewebsites.net/api/GenerateFristenForType/${selectedYear}/${selectedType}`;
 
-    try {
-      const response = await fetch(requestUrl, {
-        method: "GET",
-        mode: "cors",
-      });
+    const response = await fetch(requestUrl, {
+      method: "GET",
+      mode: "cors",
+    });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      dataCache[cacheKey] = data;
-      return data;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error;
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    return response.json();
   }
 
-  function processData(data: CacheData): CalendarEntry[] {
+  function processData(data: string[]): CalendarEntry[] {
     let yearSelected = selectedYear;
     let monthSelected = parseInt(selectedMonth);
 
@@ -114,14 +96,12 @@
 
   async function loadData(): Promise<void> {
     if (!selectedYear || !selectedMonth || !selectedType) return;
-
     isLoading = true;
-
     try {
       const data = await fetchData();
       entries = processData(data);
     } catch (error) {
-      console.error("Error in loadData:", error);
+      console.error("Error while attempting to load data", error);
       entries = [];
     } finally {
       isLoading = false;
@@ -134,13 +114,11 @@
 </script>
 
 <div class="h-full w-full relative flex flex-col overflow-hidden">
-  {#if isLoading}
-    <div class="flex justify-center items-center p-4">
-      <span>Lade Fristenkalender ...</span>
-    </div>
-  {:else if entries.length === 0}
-    <span>Keine Fristen für den ausgewählten Zeitraum gefunden.</span>
-  {:else}
+  {#if !isLoading && entries.length === 0}
+    <span class="text-lg text-transform: uppercase"
+      >Keine Fristen für den ausgewählten Zeitraum gefunden.</span
+    >
+  {:else if !isLoading}
     <div class="overflow-auto flex-1 min-h-0">
       <table class="w-full text-left">
         <thead class="text-sm bg-tint uppercase sticky top-0 z-10">
