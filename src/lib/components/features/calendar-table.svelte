@@ -23,7 +23,6 @@
 
     const response = await fetch(requestUrl, {
       method: "GET",
-      mode: "cors",
     });
 
     if (!response.ok) {
