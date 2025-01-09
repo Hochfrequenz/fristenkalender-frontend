@@ -13,7 +13,7 @@ export async function downloadCalendar(year: number): Promise<void> {
 
     const link = document.createElement("a");
     link.href = url;
-    link.download = `HFFristenkalender${year}.ics`;
+    link.download = `Hochfrequenz_Fristenkalender_${year}.ics`;
 
     document.body.appendChild(link);
     link.click();
