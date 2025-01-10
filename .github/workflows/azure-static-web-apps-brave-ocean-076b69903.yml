@@ -33,6 +33,8 @@ jobs:
           output_location: "build" # Built app content directory - optional
           skip_deploy_on_missing_secrets: true # dependabot related
           ###### End of Repository/Build Configurations ######
+        env:
+          VITE_AUTH0_CLIENT_ID: Hku0EniRjy4B2krnx1sCwTIOzAiVta1B
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
