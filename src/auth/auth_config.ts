@@ -1,6 +1,8 @@
+const isDev = import.meta.env.DEV || window.location.hostname === "localhost";
+
 const config = {
   domain: "auth.hochfrequenz.de",
-  clientId: "Hku0EniRjy4B2krnx1sCwTIOzAiVta1B", // shared "HF-stage-apps" auth0 client ID
+  clientId: isDev ? "" : import.meta.env.VITE_AUTH0_CLIENT_ID || "", // shared "HF-apps-stage/prod" tenant auth0 client IDs
 };
 
 export default config as {
