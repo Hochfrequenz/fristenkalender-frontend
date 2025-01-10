@@ -1,9 +1,8 @@
 export async function downloadCalendar(year: number): Promise<void> {
   try {
     const apiEndpoint = `https://fristenkalender.azurewebsites.net/api/GenerateAndExportWholeCalendar/calendar/test@test.com/${year}`;
-    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(apiEndpoint)}`;
 
-    const response = await fetch(proxyUrl);
+    const response = await fetch(apiEndpoint);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -14,7 +13,7 @@ export async function downloadCalendar(year: number): Promise<void> {
 
     const link = document.createElement("a");
     link.href = url;
-    link.download = `HFFristenkalender${year}.ics`;
+    link.download = `Hochfrequenz_Fristenkalender_${year}.ics`;
 
     document.body.appendChild(link);
     link.click();
