@@ -27,3 +27,5 @@ jobs:
           api_location: "build/server" # Api source code path - optional
           output_location: "build" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
+        env:
+          VITE_AUTH0_CLIENT_ID: VSkXGqlTD7Rf5Q4n9a0h00rInEyL2ZQj
