@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { IconSpinner } from "$lib/components";
   import type { CalendarEntry } from "$lib/types/calendar-entry";
   import type { MonthValue } from "$lib/types/calendar-month";
   import type { TypeValue } from "$lib/types/calendar-type";
@@ -113,11 +114,17 @@
 </script>
 
 <div class="h-full w-full relative flex flex-col overflow-hidden">
-  {#if !isLoading && entries.length === 0}
-    <span class="text-lg text-transform: uppercase"
-      >Keine Fristen für den ausgewählten Zeitraum gefunden.</span
-    >
-  {:else if !isLoading}
+  {#if isLoading}
+    <div class="flex flex-1 items-center justify-center">
+      <div>
+        <IconSpinner size={80} fillColor="fill-tint" />
+      </div>
+    </div>
+  {:else if entries.length === 0}
+    <span class="text-lg text-transform: uppercase">
+      Keine Fristen für den ausgewählten Zeitraum gefunden.
+    </span>
+  {:else}
     <div class="overflow-auto flex-1 min-h-0">
       <table class="w-full text-left">
         <thead class="text-sm bg-tint uppercase sticky top-0 z-10">
