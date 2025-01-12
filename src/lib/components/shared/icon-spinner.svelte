@@ -1,14 +1,13 @@
 <script lang="ts">
-  export let size = 8;
+  export let size = 48;
   export let fillColor = "fill-blue-600";
-
-  $: sizeClasses = `w-${size} h-${size}`;
 </script>
 
-<div role="status" class="flex items-center justify-center">
+<div role="status">
   <svg
     aria-hidden="true"
-    class="{sizeClasses} animate-spin dark:text-gray-600 {fillColor}"
+    class="animate-spin dark:text-secondary {fillColor}"
+    style="width: {size}px; height: {size}px;"
     viewBox="0 0 100 101"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -22,5 +21,4 @@
       fill="currentFill"
     />
   </svg>
-  <span class="sr-only">Loading...</span>
 </div>
