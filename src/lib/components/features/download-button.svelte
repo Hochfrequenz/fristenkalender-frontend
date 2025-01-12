@@ -1,33 +1,15 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
 
+  import { IconDownload, IconSpinner } from "$lib/components";
   import { downloadCalendar } from "$lib/services/download-ics";
-
-  import IconDownload from "../shared/icon-download.svelte";
 
   export let background = "bg-secondary";
   export let textColor = "text-white";
   export let selectedYear: number;
 
   let isDownloading = false;
-  let cooldownTime = 3; // 3s download cooldown
-  let cooldownRemaining = 0;
   let cooldownInterval: number | null = null;
-
-  function startCooldown() {
-    isDownloading = true;
-    cooldownRemaining = cooldownTime;
-
-    cooldownInterval = window.setInterval(() => {
-      cooldownRemaining--;
-      if (cooldownRemaining <= 0) {
-        if (cooldownInterval) {
-          window.clearInterval(cooldownInterval);
-        }
-        isDownloading = false;
-      }
-    }, 1000);
-  }
 
   onDestroy(() => {
     if (cooldownInterval) {
@@ -39,15 +21,15 @@
     if (isDownloading) return;
 
     try {
-      startCooldown();
+      isDownloading = true;
       await downloadCalendar(selectedYear);
     } catch (error) {
       console.error("Error in download handler:", error);
-      cooldownRemaining = 0;
-      isDownloading = false;
-      if (cooldownInterval) {
-        window.clearInterval(cooldownInterval);
-      }
+    } finally {
+      setTimeout(() => {
+        // 3 seconds cooldown timer
+        isDownloading = false;
+      }, 3000);
     }
   }
 </script>
@@ -59,6 +41,7 @@
     class="
       flex
       items-center
+      justify-center
       gap-2
       rounded-full
       {background}
@@ -72,13 +55,15 @@
       transition-all
       duration-300
       ease-in-out
-      {isDownloading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}"
+      min-w-[290px]
+      {isDownloading ? 'opacity-60 cursor-not-allowed' : 'hover:scale-105'}"
   >
-    <IconDownload />
     {#if isDownloading}
-      Download gestartet ({cooldownRemaining}s)
+      <IconSpinner size={25} fillColor="fill-white" />
+      Download gestartet
     {:else}
-      Download Jahreskalender
+      <IconDownload />
+      Download Jahreskalender ICS
     {/if}
   </button>
 </div>
