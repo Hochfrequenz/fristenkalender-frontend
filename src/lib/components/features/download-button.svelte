@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
-  import { downloadCalendar } from "$lib/services/download-ics";
+
   import { IconDownload, IconSpinner } from "$lib/components";
+  import { downloadCalendar } from "$lib/services/download-ics";
 
   export let background = "bg-secondary";
   export let textColor = "text-white";
