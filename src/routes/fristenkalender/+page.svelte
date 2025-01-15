@@ -4,7 +4,7 @@
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { page } from "$app/stores";
-  import { DownloadButton, Header } from "$lib/components";
+  import { DownloadButton, GlossaryToggle, Header } from "$lib/components";
   import CalendarTable from "$lib/components/features/calendar-table.svelte";
   import type { MonthValue } from "$lib/types/calendar-month";
   import type { TypeValue } from "$lib/types/calendar-type";
@@ -82,7 +82,7 @@
   }
 </script>
 
-<div class="flex flex-col h-full bg-tint">
+<div class="flex flex-col h-full bg-tint relative">
   <Header bind:selectedYear bind:selectedMonth bind:selectedType />
   <div class="flex flex-row justify-between">
     <div class="flex flex-col px-24 py-12">
@@ -103,4 +103,5 @@
   <div class="flex-1 min-h-0 px-24 pb-1">
     <CalendarTable {selectedYear} {selectedMonth} {selectedType} />
   </div>
+  <GlossaryToggle />
 </div>

@@ -17,3 +17,4 @@ export { default as CalendarTable } from "$lib/components/features/calendar-tabl
 export { default as CalendarTypeSelect } from "$lib/components/features/calendar-type-select.svelte";
 export { default as CalendarYearSelect } from "$lib/components/features/calendar-year-select.svelte";
 export { default as DownloadButton } from "$lib/components/features/download-button.svelte";
+export { default as GlossaryToggle } from "$lib/components/features/glossary-toggle.svelte";
