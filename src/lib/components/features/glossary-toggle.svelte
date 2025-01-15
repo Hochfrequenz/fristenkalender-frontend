@@ -14,7 +14,7 @@
       class:-translate-x-[calc(100%-2.5rem)]={!isOpen}
     >
       <div
-        class="w-90 relative shadow-lg p-3 rounded-r-lg h-[50vh] w-[40vh] overflow-y-auto"
+        class="w-90 relative shadow-lg p-3 rounded-r-lg h-[50vh] w-[50vh] overflow-y-auto"
       >
         <div
           class="absolute top-1/2 -translate-y-1/2 transition-opacity duration-300 right-4 z-20"
@@ -31,7 +31,7 @@
 
         <div
           class="absolute inset-0 bg-primary transition-opacity duration-300 rounded-r-lg"
-          class:opacity-90={isOpen}
+          class:opacity-99={isOpen}
           class:opacity-100={!isOpen}
         ></div>
 
