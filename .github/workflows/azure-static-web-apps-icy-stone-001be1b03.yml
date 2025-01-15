@@ -18,8 +18,8 @@ jobs:
         id: build_release_info
         run: |
           BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-          COMMIT_ID=$(git rev-parse HEAD)
-          BUILD_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          COMMIT_ID=${{ github.sha }}
+          BUILD_BRANCH=${{ github.ref_name }}
           VERSION_TAG=${GITHUB_REF#refs/tags/}
           sed -i "s|\"build_date\": \"0001-01-01T00:00:00Z\"|\"build_date\": \"$BUILD_DATE\"|" static/version.json
           sed -i "s|\"commit_id\": \"dummy-commit-id\"|\"commit_id\": \"$COMMIT_ID\"|" static/version.json
