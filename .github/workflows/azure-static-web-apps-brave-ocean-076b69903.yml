@@ -19,6 +19,7 @@ jobs:
         with:
           submodules: false
           lfs: false
+          fetch-depth: 0
       - name: Set build and release information
         id: build_release_info
         run: |
