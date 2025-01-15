@@ -12,6 +12,8 @@
 
   let isLoading = true;
 
+  const exposedEndpoints = [`${base}/`, `${base}/version/`];
+
   onMount(async () => {
     await auth.createClient();
 
@@ -27,14 +29,18 @@
     isLoading = false;
 
     isAuthenticated.subscribe((value: boolean) => {
-      if (!value && !isLoading && $page.url.pathname !== `${base}/`) {
+      const isExposedEndpoint = exposedEndpoints.includes($page.url.pathname);
+      if (!value && !isLoading && !isExposedEndpoint) {
         goto(`${base}/`);
       }
     });
   });
 
-  $: if (!$isAuthenticated && !isLoading && $page.url.pathname !== `${base}/`) {
-    goto(`${base}/`);
+  $: {
+    const isExposedEndpoint = exposedEndpoints.includes($page.url.pathname);
+    if (!$isAuthenticated && !isLoading && !isExposedEndpoint) {
+      goto(`${base}/`);
+    }
   }
 </script>
 
