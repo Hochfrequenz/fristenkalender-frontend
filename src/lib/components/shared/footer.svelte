@@ -32,44 +32,52 @@
       <p class="flex items-center flex-wrap justify-center">
         © {currentYear}
         {#if versionTag}
-          - {versionTag}{/if} - made with
+          -
+          <a
+            href="{base}/version/"
+            class="hover:underline font-bold mx-1"
+            title="Version details"
+            >{versionTag}
+          </a>
+        {/if}
+        - made with
         <IconHeart />
         by
         <a
-          class="ml-1 mr-2"
+          class="ml-1 mr-2 hover:underline font-bold"
           target="_blank"
           rel="noopener noreferrer"
           href="https://hochfrequenz.de">Hochfrequenz</a
         >
         |
         <a
-          class="font-bold underline ml-2"
+          class="font-bold ml-2 text-secondary"
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.hochfrequenz.de/#fristenkalender"
         >
           hier klicken</a
         >
-        <span class="mr-2"
-          >, um unseren aktuellsten Fristenkalender als PDF anzufordern</span
+        <span class="ml-1 mr-2">
+          um unseren aktuellsten Fristenkalender als PDF anzufordern</span
         >
         |
         <a
-          class="mx-2"
+          class="mx-2 hover:underline"
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.hochfrequenz.de/datenschutz/">Datenschutz</a
         >
         |
         <a
-          class="mx-2"
+          class="mx-2 hover:underline"
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.hochfrequenz.de/impressum/">Impressum</a
         >
         |
         <a
-          class="mx-2"
+          class="mx-2 hover:underline"
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.hochfrequenz.de/kontakt/">Kontakt</a
