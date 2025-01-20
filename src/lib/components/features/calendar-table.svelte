@@ -125,7 +125,7 @@
       Keine Fristen für den ausgewählten Zeitraum gefunden.
     </span>
   {:else}
-    <div class="overflow-auto flex-1 min-h-0">
+    <div class="overflow-auto flex-1 min-h-0 scrollbar-hide">
       <table class="w-full text-left">
         <thead class="text-sm bg-tint uppercase sticky top-0 z-10">
           <tr class="text-black/50">
