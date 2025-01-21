@@ -3,7 +3,7 @@
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { AuthButton, IconSquareArrow } from "$lib/components";
+  import { IconSquareArrow } from "$lib/components";
   import auth from "$src/auth/authService";
   import { isAuthenticated } from "$src/store";
 
@@ -15,12 +15,6 @@
     }
   }
 </script>
-
-<div class="relative">
-  <div class="absolute top-4 right-4 z-10">
-    <AuthButton />
-  </div>
-</div>
 
 <section class="bg-primary flex-grow flex items-center justify-center">
   <div
