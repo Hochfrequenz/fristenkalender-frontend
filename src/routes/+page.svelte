@@ -18,7 +18,7 @@
 
 <section class="bg-primary flex-grow flex items-center justify-center">
   <div
-    class="rounded-3xl w-1/3 text-justify bg-tint p-12
+    class="rounded-3xl w-1/3 bg-secondary p-12
     shadow-lg
     transition-all
     duration-300
@@ -37,11 +37,9 @@
     after:shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]
     after:pointer-events-none"
   >
-    <h1 class="text-3xl text-black/70 text-center pb-5">
-      Digitaler Fristenkalender
-    </h1>
+    <h1 class="text-3xl text-black/70 pb-5">Digitaler Fristenkalender</h1>
     <h2
-      class="flex justify-center text-lg border-b border-secondary text-black/70 pb-3 mb-5 uppercase"
+      class="flex text-lg border-b border-secondary text-black/70 pb-3 mb-5 uppercase"
     >
       Fristen im Blick und Zukunft im Griff
     </h2>
@@ -54,7 +52,7 @@
     <div class="mt-10 flex justify-center relative z-10">
       <button
         on:click={checkAuthentication}
-        class="flex flex-row items-center gap-2 rounded-full bg-secondary text-white text-lg px-5 py-2
+        class="flex flex-row items-center gap-2 rounded-full bg-primary text-white text-lg px-5 py-2
           shadow-lg
           ring-1
           ring-black/5

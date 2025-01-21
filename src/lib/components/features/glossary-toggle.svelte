@@ -30,7 +30,7 @@
         </div>
 
         <div
-          class="absolute inset-0 bg-primary transition-opacity duration-300 rounded-r-lg"
+          class="absolute inset-0 bg-secondary transition-opacity duration-300 rounded-r-lg"
           class:opacity-99={isOpen}
           class:opacity-100={!isOpen}
         ></div>
@@ -92,7 +92,7 @@
 
       <button
         on:click={toggleSidebar}
-        class="absolute top-1/2 -translate-y-1/2 -right-5 bg-tint rounded-full p-1 hover:scale-110 transition-transform duration-200"
+        class="absolute top-1/2 -translate-y-1/2 -right-5 bg-white rounded-full p-1 hover:scale-110 transition-transform duration-200"
       >
         {#if isOpen}
           <!-- toggle off -->
