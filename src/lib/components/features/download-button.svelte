@@ -5,7 +5,7 @@
   import { downloadCalendar } from "$lib/services/download-ics";
 
   export let background = "bg-secondary";
-  export let textColor = "text-white";
+  export let textColor = "text-black";
   export let selectedYear: number;
 
   let isDownloading = false;

@@ -4,7 +4,7 @@
   import { base } from "$app/paths";
   import { IconHeart, IconLogo } from "$lib/components";
 
-  export let background = "bg-tint";
+  export let background = "bg-secondary";
 
   type VersionInfo = {
     version_tag: string;
@@ -51,12 +51,12 @@
         >
         |
         <a
-          class="font-bold ml-2 text-secondary"
+          class="font-bold ml-2 hover:underline"
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.hochfrequenz.de/#fristenkalender"
         >
-          hier klicken</a
+          hier klicken,</a
         >
         <span class="ml-1 mr-2">
           um unseren aktuellsten Fristenkalender als PDF anzufordern</span

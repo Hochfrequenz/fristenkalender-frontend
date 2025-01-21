@@ -23,7 +23,7 @@
       </a>
     </div>
 
-    <span class="text-3xl text-black/70"> Digitaler Fristenkalender </span>
+    <span class="text-xl text-black/70"> Digitaler Fristenkalender </span>
 
     <div class="flex gap-4 ml-4 pb-1">
       <CalendarYearSelect bind:selectedYear />
@@ -33,10 +33,6 @@
   </div>
 
   <div class="flex-none py-2 pr-1">
-    <AuthButton
-      background="bg-tint"
-      textColor="text-black/70"
-      userEmailTextColor="text-black/70"
-    />
+    <AuthButton background="bg-secondary" textColor="text-black/70" />
   </div>
 </header>

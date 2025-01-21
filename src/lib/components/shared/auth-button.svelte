@@ -3,13 +3,10 @@
 
   import { IconLogin, IconLogout } from "$lib/components";
   import auth from "$src/auth/authService";
-  import { isAuthenticated, user } from "$src/store";
+  import { isAuthenticated } from "$src/store";
 
-  export let background = "bg-tint";
+  export let background = "bg-white";
   export let textColor = "text-black/70";
-  export let userEmailTextColor = "text-black/70";
-
-  let userEmail: string = "";
 
   onMount(async () => {
     if (
@@ -23,12 +20,6 @@
     await auth.checkAuth();
   });
 
-  $: if ($isAuthenticated && $user) {
-    userEmail = $user.email || "";
-  } else {
-    userEmail = "";
-  }
-
   async function login() {
     await auth.loginWithRedirect();
   }
@@ -39,9 +30,6 @@
 </script>
 
 <div class="flex items-center gap-4">
-  {#if $isAuthenticated && userEmail}
-    <span class="text-[16px] {userEmailTextColor}">{userEmail}</span>
-  {/if}
   {#if $isAuthenticated}
     <button
       on:click={logout}
