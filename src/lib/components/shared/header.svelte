@@ -15,7 +15,7 @@
   export let selectedType: string;
 </script>
 
-<header class="flex items-center justify-between {background} px-3 py-2">
+<header class="flex items-center justify-between {background} px-3 py-2 z-[60]">
   <div class="flex items-center gap-4 flex-grow">
     <div class="flex-none pl-3">
       <a href="{base}/" title="landingpage">
