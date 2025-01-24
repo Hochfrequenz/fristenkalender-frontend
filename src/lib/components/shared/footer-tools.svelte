@@ -9,7 +9,7 @@
         href="https://ahb-tabellen.hochfrequenz.de"
         target="_blank"
         rel="noopener noreferrer"
-        class="flex flex-row items-center rounded-full bg-ahb_primary text-white text-lg px-5 py-2
+        class="flex flex-row items-center rounded-full bg-ahb_primary text-white text-lg px-5 py-1
             shadow-lg
             ring-1
             ring-black/5
@@ -25,7 +25,7 @@
         href="https://bedingungsbaum.hochfrequenz.de"
         target="_blank"
         rel="noopener noreferrer"
-        class="flex flex-row items-center rounded-full bg-bedingungsbaum_primary text-white text-lg px-5 py-2
+        class="flex flex-row items-center rounded-full bg-bedingungsbaum_primary text-white text-lg px-5 py-1
             shadow-lg
             ring-1
             ring-black/5
@@ -41,7 +41,7 @@
         href="https://ebd.hochfrequenz.de"
         target="_blank"
         rel="noopener noreferrer"
-        class="flex flex-row items-center rounded-full bg-ebd_primary text-white text-lg px-5 py-2
+        class="flex flex-row items-center rounded-full bg-ebd_primary text-white text-lg px-5 py-1
             shadow-lg
             ring-1
             ring-black/5
@@ -57,7 +57,7 @@
         href="https://fristenkalender.hochfrequenz.de"
         target="_blank"
         rel="noopener noreferrer"
-        class="flex flex-row items-center rounded-full bg-fristenkalender_primary text-white text-lg px-5 py-2
+        class="flex flex-row items-center rounded-full bg-fristenkalender_primary text-white text-lg px-5 py-1
             shadow-lg
             ring-1
             ring-black/5
