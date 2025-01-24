@@ -6,7 +6,7 @@
   }
 </script>
 
-<div class="fixed left-0 top-1/2 -translate-y-1/2 flex z-50">
+<div class="fixed left-0 top-1/2 -translate-y-1/2 flex z-50 h-[500px]">
   <div class="relative">
     <div
       class="flex transition-transform duration-300 ease-in-out"
@@ -14,7 +14,7 @@
       class:-translate-x-[calc(100%-2.5rem)]={!isOpen}
     >
       <div
-        class="w-90 relative shadow-lg p-3 rounded-r-lg h-[50vh] w-[50vh] overflow-y-auto"
+        class="w-90 relative shadow-lg p-3 rounded-r-lg h-full min-h-fit w-[500px] overflow-y-auto"
       >
         <div
           class="absolute top-1/2 -translate-y-1/2 transition-opacity duration-300 right-4 z-20"
@@ -40,7 +40,7 @@
           class:opacity-0={!isOpen}
           class:opacity-100={isOpen}
         >
-          <div class="p-4">
+          <div class="p-4 h-full flex items-center">
             <table class="w-full">
               <tbody>
                 <tr>

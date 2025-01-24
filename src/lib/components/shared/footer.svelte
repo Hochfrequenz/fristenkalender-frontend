@@ -20,7 +20,7 @@
   });
 </script>
 
-<footer class="flex items-center {background} px-3 py-2">
+<footer class="flex items-center {background} px-3 py-2 z-[60]">
   <div class="flex-none">
     <a href="https://hochfrequenz.de" title="landingpage">
       <IconLogo size={160} />
