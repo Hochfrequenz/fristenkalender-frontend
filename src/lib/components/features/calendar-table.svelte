@@ -117,7 +117,7 @@
   {#if isLoading}
     <div class="flex flex-1 items-center justify-center">
       <div>
-        <IconSpinner size={80} fillColor="fill-tint" />
+        <IconSpinner size={80} fillColor="fill-white" />
       </div>
     </div>
   {:else if entries.length === 0}
