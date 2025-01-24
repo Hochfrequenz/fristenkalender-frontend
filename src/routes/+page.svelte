@@ -16,9 +16,11 @@
   }
 </script>
 
-<section class="bg-primary flex-grow flex items-center justify-center">
+<section
+  class="bg-fristenkalender_primary flex-grow flex items-center justify-center"
+>
   <div
-    class="rounded-3xl w-1/3 bg-secondary p-12
+    class="rounded-3xl w-1/3 bg-fristenkalender_secondary p-12
     shadow-lg
     transition-all
     duration-300
@@ -52,7 +54,7 @@
     <div class="mt-10 flex justify-center relative z-10">
       <button
         on:click={checkAuthentication}
-        class="flex flex-row items-center gap-2 rounded-full bg-primary text-white text-lg px-5 py-2
+        class="flex flex-row items-center gap-2 rounded-full bg-fristenkalender_primary text-white text-lg px-5 py-2
           shadow-lg
           ring-1
           ring-black/5

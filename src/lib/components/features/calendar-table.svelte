@@ -130,17 +130,17 @@
         <thead class="text-sm bg-white uppercase sticky top-0 z-10">
           <tr class="text-black/50">
             <th
-              class="pb-4 font-normal relative before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.5 before:bg-secondary"
+              class="pb-4 font-normal relative before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.5 before:bg-fristenkalender_secondary"
             >
               Datum
             </th>
             <th
-              class="pb-4 font-normal relative before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.5 before:bg-secondary"
+              class="pb-4 font-normal relative before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.5 before:bg-fristenkalender_secondary"
             >
               Werktag
             </th>
             <th
-              class="pb-4 font-normal relative before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.5 before:bg-secondary"
+              class="pb-4 font-normal relative before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.5 before:bg-fristenkalender_secondary"
             >
               Beschreibung
             </th>
@@ -148,7 +148,9 @@
         </thead>
         <tbody>
           {#each entries as entry}
-            <tr class="font-medium border-b border-secondary/50 text-black/70">
+            <tr
+              class="font-medium border-b border-fristenkalender_secondary/50 text-black/70"
+            >
               <td class="py-4 whitespace-nowrap">{entry.date}</td>
               <td class="py-4 whitespace-nowrap"
                 >{formatWorkday(entry.workday)}</td
