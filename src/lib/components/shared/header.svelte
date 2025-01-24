@@ -9,7 +9,7 @@
   } from "$lib/components";
   import type { MonthValue } from "$lib/types/calendar-month";
 
-  export let background = "bg-primary";
+  export let background = "bg-fristenkalender_primary";
   export let selectedYear: number;
   export let selectedMonth: MonthValue;
   export let selectedType: string;
@@ -33,6 +33,9 @@
   </div>
 
   <div class="flex-none py-2 pr-1">
-    <AuthButton background="bg-secondary" textColor="text-black/70" />
+    <AuthButton
+      background="bg-fristenkalender_secondary"
+      textColor="text-black/70"
+    />
   </div>
 </header>

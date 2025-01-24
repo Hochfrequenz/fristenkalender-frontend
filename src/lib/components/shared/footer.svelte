@@ -4,7 +4,7 @@
   import { base } from "$app/paths";
   import { IconHeart, IconLogo } from "$lib/components";
 
-  export let background = "bg-secondary";
+  export let background = "bg-fristenkalender_secondary";
 
   type VersionInfo = {
     version_tag: string;

@@ -30,7 +30,7 @@
         </div>
 
         <div
-          class="absolute inset-0 bg-secondary transition-opacity duration-300 rounded-r-lg"
+          class="absolute inset-0 bg-fristenkalender_secondary transition-opacity duration-300 rounded-r-lg"
           class:opacity-99={isOpen}
           class:opacity-100={!isOpen}
         ></div>

@@ -6,7 +6,7 @@
 <div role="status">
   <svg
     aria-hidden="true"
-    class="animate-spin dark:text-secondary {fillColor}"
+    class="animate-spin dark:text-fristenkalender_secondary {fillColor}"
     style="width: {size}px; height: {size}px;"
     viewBox="0 0 100 101"
     fill="none"
