@@ -1,8 +1,8 @@
 <script lang="ts">
-  export let background = "bg-off_white";
+  export let background = "bg-white";
 </script>
 
-<footer class="flex items-center {background} px-3 py-3">
+<footer class="flex items-center {background} py-4">
   <div class="flex-1 flex justify-center">
     <div class="flex items-center text-sm text-black/70 gap-10 text-center">
       <a
