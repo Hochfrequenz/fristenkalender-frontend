@@ -54,7 +54,7 @@
     <div class="mt-10 flex justify-center relative z-10">
       <button
         on:click={checkAuthentication}
-        class="flex flex-row items-center gap-2 rounded-full bg-fristenkalender_primary text-white text-lg px-5 py-2
+        class="flex flex-row items-center gap-2 rounded-full bg-fristenkalender_primary text-weichesschwarz text-lg px-5 py-2
           shadow-lg
           ring-1
           ring-black/5
