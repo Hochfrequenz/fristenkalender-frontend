@@ -41,7 +41,7 @@
   >
     <h1 class="text-3xl text-black/70 pb-5">Digitaler Fristenkalender</h1>
     <h2
-      class="flex text-lg border-b border-secondary text-black/70 pb-3 mb-5 uppercase"
+      class="flex text-lg border-b border-fristenkalender_tone text-black/70 pb-3 mb-5 uppercase"
     >
       Fristen im Blick und Zukunft im Griff
     </h2>

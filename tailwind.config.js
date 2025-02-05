@@ -13,6 +13,7 @@ export default {
         ebd_secondary: "#C2CEE9",
         fristenkalender_primary: "#ABDCD3",
         fristenkalender_secondary: "#D4EDE8",
+        fristenkalender_tone: "#73B2A5",
       },
     },
   },
