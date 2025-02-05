@@ -55,7 +55,6 @@
       <button
         on:click={checkAuthentication}
         class="flex flex-row items-center gap-2 rounded-full bg-fristenkalender_primary text-white text-lg px-5 py-2
-          shadow-lg
           ring-1
           ring-black/5
           hover:ring-black/10
