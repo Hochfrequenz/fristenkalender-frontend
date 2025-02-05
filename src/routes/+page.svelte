@@ -41,7 +41,7 @@
   >
     <h1 class="text-3xl text-black/70 pb-5">Digitaler Fristenkalender</h1>
     <h2
-      class="flex text-lg border-b border-secondary text-black/70 pb-3 mb-5 uppercase"
+      class="flex text-lg border-b border-fristenkalender_tone text-black/70 pb-3 mb-5 uppercase"
     >
       Fristen im Blick und Zukunft im Griff
     </h2>
@@ -55,7 +55,6 @@
       <button
         on:click={checkAuthentication}
         class="flex flex-row items-center gap-2 rounded-full bg-fristenkalender_primary text-weichesschwarz text-lg px-5 py-2
-          shadow-lg
           ring-1
           ring-black/5
           hover:ring-black/10
