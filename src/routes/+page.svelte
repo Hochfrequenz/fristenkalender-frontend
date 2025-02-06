@@ -60,8 +60,7 @@
           hover:ring-black/10
           transition-all
           duration-300
-          ease-in-out
-          hover:scale-110"
+          ease-in-out"
       >
         <IconSquareArrow /> Jetzt öffnen
       </button>
