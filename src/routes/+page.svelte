@@ -3,7 +3,7 @@
 
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
-  import { IconSquareArrow } from "$lib/components";
+  import { IconLogin } from "$lib/components";
   import auth from "$src/auth/authService";
   import { isAuthenticated } from "$src/store";
 
@@ -62,7 +62,7 @@
           duration-300
           ease-in-out"
       >
-        <IconSquareArrow /> Jetzt öffnen
+        <IconLogin /> Jetzt öffnen
       </button>
     </div>
   </div>
