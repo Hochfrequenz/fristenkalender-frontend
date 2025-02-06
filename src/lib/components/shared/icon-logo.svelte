@@ -5,11 +5,7 @@
 </script>
 
 <img
-  class="me-5"
-  style:width="{size}px"
-  style:height="auto"
-  width={size}
-  height={size}
+  class="me-5 w-[160px]"
   src="{base}/logo.svg"
   alt="Hochfrequenz-Logo"
 />
