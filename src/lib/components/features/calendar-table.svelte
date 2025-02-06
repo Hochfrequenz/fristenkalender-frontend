@@ -151,7 +151,7 @@
         <tbody>
           {#each entries as entry}
             <tr
-              class="font-base border-b border-fristenkalender_primary/65 text-black/70"
+              class="border-b border-fristenkalender_primary/65 text-black/70"
             >
               <td class="py-4 whitespace-nowrap">{entry.date}</td>
               <td class="py-4 whitespace-nowrap"
