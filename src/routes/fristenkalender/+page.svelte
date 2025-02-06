@@ -82,7 +82,7 @@
   }
 </script>
 
-<div class="flex flex-col h-full bg-white relative">
+<div class="flex flex-col h-full bg-fristenkalender_secondary relative">
   <Header bind:selectedYear bind:selectedMonth bind:selectedType />
   <div class="flex flex-row justify-between">
     <div class="flex flex-col px-24 py-12">

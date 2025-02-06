@@ -127,7 +127,7 @@
   {:else}
     <div class="overflow-auto flex-1 min-h-0 scrollbar-hide">
       <table class="w-full text-left">
-        <thead class="text-sm bg-white uppercase sticky top-0 z-10">
+        <thead class="text-sm bg-secondary uppercase sticky top-0 z-10">
           <tr class="text-black/50">
             <th
               class="pb-4 font-normal relative before:absolute before:bottom-0 before:left-0 before:right-0 before:h-0.5 before:bg-fristenkalender_secondary"
@@ -149,7 +149,7 @@
         <tbody>
           {#each entries as entry}
             <tr
-              class="font-medium border-b border-fristenkalender_secondary/50 text-black/70"
+              class="font-medium border-b border-fristenkalender_primary/65 text-black/70"
             >
               <td class="py-4 whitespace-nowrap">{entry.date}</td>
               <td class="py-4 whitespace-nowrap"
