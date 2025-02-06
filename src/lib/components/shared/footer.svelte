@@ -82,6 +82,14 @@
           rel="noopener noreferrer"
           href="https://www.hochfrequenz.de/kontakt/">Kontakt</a
         >
+        |
+        <a
+          class="mx-2 hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/Hochfrequenz/fristenkalender-frontend/"
+          >Github</a
+        >
       </p>
     </div>
   </div>
