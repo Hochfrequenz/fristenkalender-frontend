@@ -10,14 +10,12 @@
         target="_blank"
         rel="noopener noreferrer"
         class="flex flex-row items-center rounded-full bg-ahb_primary text-white text-lg px-5 py-1
-            shadow-lg
             ring-1
             ring-black/5
             hover:ring-black/10
             transition-all
             duration-300
-            ease-in-out
-            hover:scale-110"
+            ease-in-out"
       >
         AHB-Tabellen
       </a>
@@ -26,14 +24,12 @@
         target="_blank"
         rel="noopener noreferrer"
         class="flex flex-row items-center rounded-full bg-bedingungsbaum_primary text-white text-lg px-5 py-1
-            shadow-lg
             ring-1
             ring-black/5
             hover:ring-black/10
             transition-all
             duration-300
-            ease-in-out
-            hover:scale-110"
+            ease-in-out"
       >
         Bedingungsbaum
       </a>
@@ -42,14 +38,12 @@
         target="_blank"
         rel="noopener noreferrer"
         class="flex flex-row items-center rounded-full bg-ebd_primary text-white text-lg px-5 py-1
-            shadow-lg
             ring-1
             ring-black/5
             hover:ring-black/10
             transition-all
             duration-300
-            ease-in-out
-            hover:scale-110"
+            ease-in-out"
       >
         Entscheidungsbaumdiagramme
       </a>
@@ -58,14 +52,12 @@
         target="_blank"
         rel="noopener noreferrer"
         class="flex flex-row items-center rounded-full bg-fristenkalender_primary text-white text-lg px-5 py-1
-            shadow-lg
             ring-1
             ring-black/5
             hover:ring-black/10
             transition-all
             duration-300
-            ease-in-out
-            hover:scale-110"
+            ease-in-out"
       >
         Fristenkalender
       </a>
