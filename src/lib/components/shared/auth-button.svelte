@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import { IconLogin, IconLogout } from "$lib/components";
+  import { IconLogout } from "$lib/components";
   import auth from "$src/auth/authService";
   import { isAuthenticated } from "$src/store";
 
@@ -20,10 +20,6 @@
     await auth.checkAuth();
   });
 
-  async function login() {
-    await auth.loginWithRedirect();
-  }
-
   async function logout() {
     await auth.logout();
   }
@@ -38,8 +34,8 @@
         items-center
         gap-2
         rounded-full
-        {background} 
-        {textColor} 
+        {background}
+        {textColor}
         text-[16px]
         py-3
         px-5
@@ -52,28 +48,6 @@
         hover:scale-105"
     >
       Abmelden <IconLogout />
-    </button>
-  {:else}
-    <button
-      on:click={login}
-      class="
-        flex
-        items-center
-        gap-2 rounded-full
-        {background} 
-        {textColor} 
-        text-[16px]
-        py-3
-        px-5
-        shadow-md
-        ring-1
-        ring-black/5
-        transition-all
-        duration-300
-        ease-in-out
-        hover:scale-105"
-    >
-      Anmelden <IconLogin />
     </button>
   {/if}
 </div>
