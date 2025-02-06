@@ -1,7 +1,5 @@
 <script>
   import { base } from "$app/paths";
-
-  export let size = 40;
 </script>
 
 <img
