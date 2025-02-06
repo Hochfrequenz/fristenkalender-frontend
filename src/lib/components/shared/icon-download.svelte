@@ -1,13 +1,15 @@
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  class="lucide lucide-arrow-down-to-line"
-  ><path d="M12 17V3" /><path d="m6 11 6 6 6-6" /><path d="M19 21H5" /></svg
->
+<script lang="ts">
+  import { base } from "$app/paths";
+
+  export let width = "18";
+  export let height = "18";
+  export let stroke = "currentColor";
+</script>
+
+<img
+  src="{base}/companystylesheet/icons/download.svg"
+  {width}
+  {height}
+  alt="Download icon"
+  style="stroke: {stroke}"
+/>
