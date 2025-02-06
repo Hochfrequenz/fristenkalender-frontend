@@ -1,8 +1,8 @@
 <script lang="ts">
   import { base } from "$app/paths";
 
-  export let width = "20";
-  export let height = "20";
+  export let width = "18";
+  export let height = "18";
   export let stroke = "currentColor";
 </script>
 
@@ -12,5 +12,4 @@
   {height}
   alt="Square arrow icon"
   style="stroke: {stroke}"
-  class="size-5"
 />
