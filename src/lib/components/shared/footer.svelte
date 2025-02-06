@@ -87,7 +87,8 @@
           class="mx-2 hover:underline"
           target="_blank"
           rel="noopener noreferrer"
-          href="https://github.com/Hochfrequenz/fristenkalender-frontend/">Github</a
+          href="https://github.com/Hochfrequenz/fristenkalender-frontend/"
+          >Github</a
         >
       </p>
     </div>
