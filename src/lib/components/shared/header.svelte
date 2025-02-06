@@ -16,16 +16,16 @@
 </script>
 
 <header class="flex items-center justify-between {background} px-3 py-2 z-[60]">
-  <div class="flex items-center gap-4 flex-grow">
+  <div class="flex items-center gap-3 flex-grow">
     <div class="flex-none pl-3">
       <a href="{base}/" title="landingpage">
-        <IconSymbol size={35} />
+        <IconSymbol size={23} />
       </a>
     </div>
 
     <span class="text-xl text-black/70"> Digitaler Fristenkalender </span>
 
-    <div class="flex gap-4 ml-4 pb-1">
+    <div class="flex gap-4 ml-4 pb-1.5">
       <CalendarYearSelect bind:selectedYear />
       <CalendarMonthSelect bind:selectedMonth />
       <CalendarTypeSelect bind:selectedType />
