@@ -16,7 +16,11 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 1
-
+          submodules: "recursive"
+          lfs: false
+          token: ${{secrets.COMPANYSTYLESHEET_ACCESS_TOKEN}} # expires 2026-02-01
+          # https://github.com/Hochfrequenz/fristenkalender-frontend/settings/secrets/actions/COMPANYSTYLESHEET_ACCESS_TOKEN
+          # PAT has repo scope
       - uses: actions/setup-node@v4
         with:
           node-version: "20.13"
