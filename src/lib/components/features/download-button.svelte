@@ -4,7 +4,7 @@
   import { IconDownload, IconSpinner } from "$lib/components";
   import { downloadCalendar } from "$lib/services/download-ics";
 
-  export let background = "bg-fristenkalender_secondary";
+  export let background = "bg-fristenkalender_primary";
   export let textColor = "text-black";
   export let selectedYear: number;
 
