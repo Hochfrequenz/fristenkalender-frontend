@@ -4,6 +4,6 @@
 
 <img
   class="me-5 w-[160px]"
-  src="{base}/companystylesheet/logo_weiss.svg"
+  src="{base}/logo.svg"
   alt="Hochfrequenz-Logo"
 />
