@@ -47,7 +47,7 @@
         ease-in-out
         hover:scale-105"
     >
-      Abmelden <IconLogout />
+      Ausloggen <IconLogout />
     </button>
   {/if}
 </div>
