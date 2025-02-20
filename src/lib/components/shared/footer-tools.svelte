@@ -10,7 +10,7 @@
         target="_blank"
         rel="noopener noreferrer"
         style="font:14px/22px Roboto, sans-serif; line-height:1.5;"
-        class="flex flex-row items-center rounded-full bg-ahb_primary text-white text-lg px-2 py-1 m-2
+        class="flex flex-row items-center rounded-full bg-ahb_tone text-white text-lg px-2 py-1 m-2
             ring-1
             ring-black/5
             hover:ring-black/10
