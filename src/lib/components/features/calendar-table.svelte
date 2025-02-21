@@ -125,7 +125,7 @@
       Keine Fristen für den ausgewählten Zeitraum gefunden.
     </span>
   {:else}
-    <div class="overflow-auto flex-1 min-h-0 scrollbar-hide">
+    <div class="overflow-auto flex-1 min-h-0">
       <table class="w-full text-left">
         <thead
           class="text-sm bg-fristenkalender_secondary uppercase sticky top-0 z-10"
