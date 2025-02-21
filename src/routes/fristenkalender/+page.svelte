@@ -100,7 +100,7 @@
       <DownloadButton {selectedYear} />
     </div>
   </div>
-  <div class="flex-1 min-h-0 px-24 pb-1">
+  <div class="flex-1 min-h-0 px-24 pb-8">
     <CalendarTable {selectedYear} {selectedMonth} {selectedType} />
   </div>
   <GlossaryToggle />
