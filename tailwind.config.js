@@ -7,6 +7,7 @@ export default {
         off_white: "#E7E6E5",
         ahb_primary: "#ff569c",
         ahb_secondary: "#F4E0E1",
+        ahb_tone: "#ebbec1",
         bedingungsbaum_primary: "#e5bd5c",
         bedingungsbaum_secondary: "#F4E2B9",
         ebd_primary: "#8BA2D7",
