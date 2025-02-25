@@ -31,12 +31,10 @@
     before:absolute
     before:inset-0
     before:rounded-3xl
-    before:shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)]
     before:pointer-events-none
     after:absolute
     after:inset-0
     after:rounded-3xl
-    after:shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]
     after:pointer-events-none"
   >
     <h1 class="text-3xl text-black/70 pb-5">Digitaler Fristenkalender</h1>
