@@ -14,9 +14,6 @@ jobs:
         with:
           submodules: "recursive"
           lfs: false
-          token: ${{secrets.COMPANYSTYLESHEET_ACCESS_TOKEN}} # expires 2026-02-01
-          # https://github.com/Hochfrequenz/fristenkalender-frontend/settings/secrets/actions/COMPANYSTYLESHEET_ACCESS_TOKEN
-          # PAT has repo scope
       - name: Set build and release information
         id: build_release_info
         run: |
