@@ -3,7 +3,6 @@
 ![Build status badge](https://github.com/Hochfrequenz/fristenkalender-spa/workflows/Building/badge.svg)
 ![Eslint status badge](https://github.com/Hochfrequenz/fristenkalender-spa/workflows/Linting/badge.svg)
 ![Prettier status badge](https://github.com/Hochfrequenz/fristenkalender-spa/workflows/Formatting/badge.svg)
-![PlayWright status badge](https://github.com/Hochfrequenz/fristenkalender-spa/workflows/E2E-Testing/badge.svg)
 
 ### ⚙️ Setting up development environment
 
@@ -17,7 +16,6 @@ $ npm install
 $ npm run start # starts local dev server (including hot reload)
 $ npm run lint # lints the whole project (eslint)
 $ npm run format # formats the whole project (prettier)
-$ npm run test # runs E2E tests (playwright) assuming the dev server is up and running
 ```
 
 ### 🏷️ Semantic commit messages
