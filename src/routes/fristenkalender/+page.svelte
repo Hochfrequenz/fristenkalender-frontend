@@ -20,7 +20,7 @@
   const monthNameMap: Record<MonthValue, string> = {
     "01": "januar",
     "02": "februar",
-    "03": "maerz",
+    "03": "märz",
     "04": "april",
     "05": "mai",
     "06": "juni",
