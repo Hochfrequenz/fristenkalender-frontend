@@ -1,5 +1,6 @@
 <script lang="ts">
   import { IconSpinner } from "$lib/components";
+  import type { CalendarApiEntry } from "$lib/types/calendar-api-response";
   import type { CalendarEntry } from "$lib/types/calendar-entry";
   import type { MonthValue } from "$lib/types/calendar-month";
   import type { TypeValue } from "$lib/types/calendar-type";
@@ -16,11 +17,14 @@
     return workday.replace(/(\d+)([a-zA-Z]+)/g, "$1 $2");
   }
 
-  async function fetchData(): Promise<string[]> {
+  async function fetchData(): Promise<CalendarApiEntry[]> {
+    const year = selectedYear.toString();
+    const type = selectedType.toString();
+
     const requestUrl =
-      selectedType === "ALL"
-        ? `https://fristenkalender.azurewebsites.net/api/GenerateAllFristen/${selectedYear}`
-        : `https://fristenkalender.azurewebsites.net/api/GenerateFristenForType/${selectedYear}/${selectedType}`;
+      type === "ALL"
+        ? `https://fristenkalender.azurewebsites.net/api/GenerateAllFristen/${year}`
+        : `https://fristenkalender.azurewebsites.net/api/GenerateFristenForType/${year}/${type}`;
 
     const response = await fetch(requestUrl, {
       method: "GET",
@@ -33,15 +37,14 @@
     return response.json();
   }
 
-  function processData(data: string[]): CalendarEntry[] {
+  function processData(data: CalendarApiEntry[]): CalendarEntry[] {
     let yearSelected = selectedYear;
     let monthSelected = parseInt(selectedMonth);
 
     if (monthSelected === 0) {
       yearSelected -= 1;
       monthSelected = 12;
-    }
-    if (monthSelected === 13) {
+    } else if (monthSelected === 13) {
       yearSelected += 1;
       monthSelected = 1;
     }
@@ -61,37 +64,30 @@
       "Dez",
     ];
 
-    return data
+    const entries = data
+      .filter((row) => row && typeof row === "object")
       .map((row) => {
-        const labelMatch = row.match(/label='(.*?)'/);
-        const dateMatch = row.match(
-          /datetime\.date\((?<year>\d+), (?<month>\d+), (?<day>\d+)\)/,
-        );
-        const descriptionMatch = row.match(/description='(.*?)'/);
+        const dateObj = new Date(row.date);
+        const rowYear = dateObj.getFullYear();
+        const rowMonth = dateObj.getMonth() + 1;
 
-        if (!dateMatch?.groups || !labelMatch?.[1]) return null;
-
-        const year = parseInt(dateMatch.groups.year);
-        const monthInt = parseInt(dateMatch.groups.month);
-        const day = parseInt(dateMatch.groups.day);
-
-        if (monthInt !== monthSelected || year !== yearSelected) return null;
+        if (rowMonth !== monthSelected || rowYear !== yearSelected) return null;
 
         return {
-          date: `${day}. ${monthNames[monthInt - 1]} ${year}`,
-          workday: labelMatch[1],
-          description: (descriptionMatch?.[1] || "").replace(/\\n/g, "<br>"),
+          dateObj,
+          date: `${dateObj.getDate()}. ${monthNames[rowMonth - 1]} ${rowYear}`,
+          workday: row.label,
+          description: (row.description || "").replace(/\\n/g, "<br>"),
         };
       })
-      .filter((entry): entry is CalendarEntry => entry !== null)
-      .sort((a, b) => {
-        const [dayA, monthA, yearA] = a.date.split(" ");
-        const [dayB, monthB, yearB] = b.date.split(" ");
-        return (
-          new Date(`${yearA}-${monthA}-${dayA}`).getTime() -
-          new Date(`${yearB}-${monthB}-${dayB}`).getTime()
-        );
-      });
+      .filter(
+        (entry): entry is CalendarEntry & { dateObj: Date } => entry !== null,
+      );
+
+    entries.sort((a, b) => a.dateObj.getTime() - b.dateObj.getTime());
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    return entries.map(({ dateObj, ...entry }) => entry);
   }
 
   async function loadData(): Promise<void> {
