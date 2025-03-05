@@ -78,7 +78,7 @@
         if (monthInt !== monthSelected || year !== yearSelected) return null;
 
         return {
-          date: `${day} ${monthNames[monthInt - 1]} ${year}`,
+          date: `${day}. ${monthNames[monthInt - 1]} ${year}`,
           workday: labelMatch[1],
           description: (descriptionMatch?.[1] || "").replace(/\\n/g, "<br>"),
         };
