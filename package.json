@@ -22,7 +22,7 @@
     "@types/jquery": "^3.5.32",
     "@types/node": "^22.13.9",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
-    "@typescript-eslint/parser": "^8.25.0",
+    "@typescript-eslint/parser": "^8.26.1",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.20.0",
     "eslint-config-prettier": "^10.0.1",
