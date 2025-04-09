@@ -49,6 +49,10 @@
       So können alle offiziellen Fristen, beispielsweise der GPKE und MaBiS, in
       Ihre Kalender importiert und dort als Ereignisse angezeigt werden.
     </h3>
+    <h3 class="text-black/70">
+      Wir geben unser Bestes, dass alle Daten korrekt und vollständig sind,
+      können es aber leider nicht garantieren.
+    </h3>
     <div class="mt-10 flex justify-center relative z-10">
       <button
         on:click={checkAuthentication}
