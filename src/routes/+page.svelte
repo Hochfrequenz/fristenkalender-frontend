@@ -39,20 +39,25 @@
   >
     <h1 class="text-3xl text-black/70 pb-5">Digitaler Fristenkalender</h1>
     <h2
-      class="flex text-lg border-b border-fristenkalender_tone text-black/70 pb-3 mb-5 uppercase"
+      class="flex text-lg border-b-2 border-fristenkalender_tone text-black/70 pb-3 mb-5 uppercase"
     >
       Fristen im Blick und Zukunft im Griff
     </h2>
-    <h3 class="text-black/70">
+    text-hf-weiches-schwarz space-y-3 border-b-2 border-dashed border-hf-grell-rose
+    pb-5
+    <h3
+      class="text-black/70 space-y-3 border-b-2 border-dashed border-fristenkalender_tone pb-5"
+    >
       Der digitale Fristenkalender bringt den bewährten
       Hochfrequenz-Fristenkalender vom Wandformat direkt in Ihre Kalender-App.
       So können alle offiziellen Fristen, beispielsweise der GPKE und MaBiS, in
       Ihre Kalender importiert und dort als Ereignisse angezeigt werden.
     </h3>
-    <h3 class="text-black/70">
-      Wir geben unser Bestes, dass alle Daten korrekt und vollständig sind,
-      können es aber leider nicht garantieren.
-    </h3>
+    <div class="text-hf-weiches-schwarz text-sm mt-5 opacity-50 italic">
+      <span class="font-medium">DISCLAIMER:</span> Wir geben unser Bestes, dass alle
+      Daten korrekt und vollständig sind – können aber trotzdem nicht ausschließen,
+      dass sich vereinzelt Fehler einschleichen.
+    </div>
     <div class="mt-10 flex justify-center relative z-10">
       <button
         on:click={checkAuthentication}
