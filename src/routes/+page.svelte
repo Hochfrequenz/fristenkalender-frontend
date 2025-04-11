@@ -43,7 +43,6 @@
     >
       Fristen im Blick und Zukunft im Griff
     </h2>
-    pb-5
     <h3
       class="text-black/70 space-y-3 border-b-2 border-dashed border-fristenkalender_tone pb-5"
     >
