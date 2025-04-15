@@ -25,7 +25,7 @@
         >
           <span
             class="block -rotate-180 font-medium text-black/70"
-            style="writing-mode: vertical-rl;"
+            style="writing-mode: vertical-rl; margin-left: -20px;"
           >
             GLOSSAR
           </span>
