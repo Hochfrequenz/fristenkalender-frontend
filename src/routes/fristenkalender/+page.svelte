@@ -4,7 +4,7 @@
   import { goto } from "$app/navigation";
   import { base } from "$app/paths";
   import { page } from "$app/stores";
-  import { DownloadButton, GlossaryToggle, Header } from "$lib/components";
+  import { GlossaryToggle, Header } from "$lib/components";
   import CalendarTable from "$lib/components/features/calendar-table.svelte";
   import type { MonthValue } from "$lib/types/calendar-month";
   import type { TypeValue } from "$lib/types/calendar-type";
@@ -95,9 +95,6 @@
         Netzzugangsthemen: {typeNames.find((t) => t.value === selectedType)
           ?.label || "alle"}
       </h2>
-    </div>
-    <div class="px-24 py-12">
-      <DownloadButton {selectedYear} />
     </div>
   </div>
   <div class="flex-1 min-h-0 px-24 pb-8">
