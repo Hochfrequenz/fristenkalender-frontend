@@ -48,6 +48,6 @@ To get past the landing page when navigating through the staging environment `ht
 Mockup: TBD<br>
 Azure: TBD
 
-[fristenkalender-generator](https://github.com/Hochfrequenz/fristenkalender_generator)<br>
-[fristenkalender-functions](https://github.com/Hochfrequenz/fristenkalender-functions)<br>
+[fristenkalender-generator](https://github.com/Hochfrequenz/fristenkalender_generator) (backend business logic)<br>
+[fristenkalender-functions](https://github.com/Hochfrequenz/fristenkalender-functions) (backend API)<br>
 [fristenkalender-frontend-legacy](https://github.com/Hochfrequenz/fristenkalender-frontend-legacy)<br>
