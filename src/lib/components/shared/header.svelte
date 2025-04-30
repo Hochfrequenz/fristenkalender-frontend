@@ -5,6 +5,7 @@
     CalendarMonthSelect,
     CalendarTypeSelect,
     CalendarYearSelect,
+    DownloadButton,
     IconSymbol,
   } from "$lib/components";
   import type { MonthValue } from "$lib/types/calendar-month";
@@ -32,10 +33,13 @@
     </div>
   </div>
 
-  <div class="flex-none py-2 pr-1">
-    <AuthButton
-      background="bg-fristenkalender_secondary"
-      textColor="text-black/70"
-    />
+  <div class="flex-none py-2 pr-3">
+    <div class="flex items-center gap-4">
+      <DownloadButton {selectedYear} />
+      <AuthButton
+        background="bg-fristenkalender_secondary"
+        textColor="text-black/70"
+      />
+    </div>
   </div>
 </header>
