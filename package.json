@@ -20,7 +20,7 @@
     "@sveltejs/kit": "^2.21.1",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@types/jquery": "^3.5.32",
-    "@types/node": "^22.15.21",
+    "@types/node": "^22.15.29",
     "@typescript-eslint/parser": "^8.33.1",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "autoprefixer": "^10.4.21",
