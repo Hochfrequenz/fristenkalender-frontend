@@ -20,7 +20,7 @@ jobs:
           lfs: false
       - uses: actions/setup-node@v4
         with:
-          node-version: "20.13"
+          node-version: "20.19"
           cache: "npm"
 
       - name: Install modules
