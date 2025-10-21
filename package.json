@@ -18,7 +18,7 @@
     "lint:check": "eslint 'src/**/*.{js,ts,svelte}'"
   },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "^6.1.0",
+    "@sveltejs/adapter-auto": "^7.0.0",
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/vite-plugin-svelte": "^6.2.1",
     "@sveltejs/kit": "^2.46.5",
