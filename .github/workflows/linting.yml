@@ -23,6 +23,9 @@ jobs:
           node-version: "20.19"
           cache: "npm"
 
+      - name: Update lock file to keep package.json and package-lock.json in sync
+        run: npm install
+
       - name: Install modules
         run: npm ci
 
