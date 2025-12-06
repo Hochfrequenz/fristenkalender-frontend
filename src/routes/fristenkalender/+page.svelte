@@ -39,7 +39,6 @@
   const typeNameMap: Record<TypeValue, string> = {
     ALL: "alle",
     GELI: "geli-gas",
-    GPKE: "gpke",
     KOV: "kov",
     MABIS: "mabis",
   };
