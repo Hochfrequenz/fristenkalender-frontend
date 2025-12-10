@@ -1,6 +1,8 @@
+import { API_BASE_URL } from "$lib/config/api";
+
 export async function downloadCalendar(year: number): Promise<void> {
   try {
-    const apiEndpoint = `https://fristenkalender.azurewebsites.net/api/GenerateAndExportWholeCalendar/calendar/test@test.com/${year}`;
+    const apiEndpoint = `${API_BASE_URL}/api/GenerateAndExportWholeCalendar/calendar/test@test.com/${year}`;
 
     const response = await fetch(apiEndpoint);
     if (!response.ok) {
