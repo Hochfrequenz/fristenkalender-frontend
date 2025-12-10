@@ -1,13 +1,15 @@
 import { expect, test } from "../fixtures/test-fixtures";
 
 test("downloads ICS file", async ({ page }) => {
-  await page.goto("/fristenkalender/");
+  // Use January which reliably has deadline entries
+  await page.goto("/fristenkalender/?monat=januar");
 
   // Wait for the calendar table specifically (not the glossary table)
-  // The calendar table is inside .overflow-auto
-  await expect(page.locator(".overflow-auto table")).toBeVisible({
-    timeout: 30000,
-  });
+  const calendarTable = page.locator(".overflow-auto table");
+  await expect(calendarTable).toBeVisible({ timeout: 30000 });
+
+  // Verify data loaded before attempting download
+  await expect(calendarTable.locator("tbody tr")).not.toHaveCount(0);
 
   // Set up download listener before clicking
   const downloadPromise = page.waitForEvent("download", { timeout: 60000 });
