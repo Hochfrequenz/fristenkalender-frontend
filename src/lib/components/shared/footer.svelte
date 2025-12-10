@@ -3,20 +3,44 @@
 
   import { base } from "$app/paths";
   import { IconHeart, IconLogo } from "$lib/components";
+  import { API_BASE_URL } from "$lib/config/api";
 
   export let background = "bg-fristenkalender_secondary";
 
-  type VersionInfo = {
+  type FrontendVersionInfo = {
     version_tag: string;
   };
 
+  type BackendVersionInfo = {
+    tag: string;
+    commit_hash: string;
+    build_date: string;
+  };
+
   let currentYear = new Date().getFullYear();
-  let versionTag: string | null = null;
+  let frontendVersion: string | null = null;
+  let backendVersion: string | null = null;
 
   onMount(async () => {
-    const response = await fetch(`${base}/version.json`);
-    const data: VersionInfo = await response.json();
-    versionTag = data.version_tag;
+    // Fetch frontend version
+    try {
+      const response = await fetch(`${base}/version.json`);
+      const data: FrontendVersionInfo = await response.json();
+      frontendVersion = data.version_tag;
+    } catch {
+      // Ignore errors fetching frontend version
+    }
+
+    // Fetch backend version
+    try {
+      const response = await fetch(`${API_BASE_URL}/version`);
+      if (response.ok) {
+        const data: BackendVersionInfo = await response.json();
+        backendVersion = data.tag;
+      }
+    } catch {
+      // Ignore errors fetching backend version (endpoint may not exist)
+    }
   });
 </script>
 
@@ -31,14 +55,21 @@
     <div class="flex items-center text-sm text-black/70 space-x-1 text-center">
       <p class="flex items-center flex-wrap justify-center">
         © {currentYear}
-        {#if versionTag}
+        {#if frontendVersion || backendVersion}
           -
-          <a
-            href="{base}/version/"
-            class="hover:underline font-bold mx-1"
-            title="Version details"
-            >{versionTag}
-          </a>
+          {#if frontendVersion}
+            <a
+              href="{base}/version/"
+              class="hover:underline font-bold mx-1"
+              title="Frontend version"
+              >{frontendVersion}</a
+            >
+          {/if}
+          {#if backendVersion}
+            <span class="text-black/50 mx-1" title="Backend version"
+              >(API: {backendVersion})</span
+            >
+          {/if}
         {/if}
         - made with
         <IconHeart />
