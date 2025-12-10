@@ -18,7 +18,7 @@ Add integration tests to the fristenkalender-frontend using Playwright for brows
 | Test framework        | Playwright                                              | Built-in Docker support, excellent SvelteKit integration |
 | Backend orchestration | Testcontainers via wrapper script                       | Programmatic control, better test isolation              |
 | API URL config        | `VITE_API_URL` env var with default                     | Optional override, defaults to production URL            |
-| Backend image         | `ghcr.io/hochfrequenz/fristenkalender-functions:v2.1.2` | Public registry, pinned version, CORS enabled            |
+| Backend image         | [`ghcr.io/hochfrequenz/fristenkalender-functions:v2.1.2`](https://github.com/Hochfrequenz/fristenkalender-functions/pkgs/container/fristenkalender-functions) | Public registry, pinned version, CORS enabled            |
 
 ## Project Structure
 
