@@ -13,22 +13,21 @@ Add integration tests to the fristenkalender-frontend using Playwright for brows
 
 ## Technical Decisions
 
-| Decision              | Choice                                                 | Rationale                                                |
-| --------------------- | ------------------------------------------------------ | -------------------------------------------------------- |
-| Test framework        | Playwright                                             | Built-in Docker support, excellent SvelteKit integration |
-| Backend orchestration | Testcontainers                                         | Programmatic control, better test isolation              |
-| API URL config        | `VITE_API_URL` env var                                 | Required in all environments, no defaults                |
-| Backend image         | `ghcr.io/hochfrequenz/fristenkalender-functions:v2.1.2` | Public registry, pinned version, CORS enabled           |
+| Decision              | Choice                                                  | Rationale                                                |
+| --------------------- | ------------------------------------------------------- | -------------------------------------------------------- |
+| Test framework        | Playwright                                              | Built-in Docker support, excellent SvelteKit integration |
+| Backend orchestration | Testcontainers via wrapper script                       | Programmatic control, better test isolation              |
+| API URL config        | `VITE_API_URL` env var with default                     | Optional override, defaults to production URL            |
+| Backend image         | `ghcr.io/hochfrequenz/fristenkalender-functions:v2.1.2` | Public registry, pinned version, CORS enabled            |
 
 ## Project Structure
 
 ```
 ├── playwright.config.ts
 ├── e2e/
-│   ├── setup/
-│   │   └── backend-container.ts
+│   ├── run-tests.ts          # Test orchestrator (container + build + test)
 │   ├── fixtures/
-│   │   └── test-fixtures.ts
+│   │   └── test-fixtures.ts  # Re-exports Playwright test/expect
 │   └── tests/
 │       ├── calendar-load.spec.ts
 │       └── calendar-download.spec.ts
@@ -44,73 +43,55 @@ Add integration tests to the fristenkalender-frontend using Playwright for brows
 **`src/lib/config/api.ts`**
 
 ```typescript
-export const API_BASE_URL = import.meta.env.VITE_API_URL;
+const DEFAULT_API_URL = "https://fristenkalender.azurewebsites.net";
 
-if (!API_BASE_URL) {
-  throw new Error("VITE_API_URL environment variable is required");
-}
+export const API_BASE_URL = import.meta.env.VITE_API_URL || DEFAULT_API_URL;
 ```
 
 **Environment setup:**
 
-- Production (GitHub Action): `VITE_API_URL=https://fristenkalender.azurewebsites.net`
-- Local dev: `VITE_API_URL=https://fristenkalender.azurewebsites.net` in `.env`
-- Tests: `VITE_API_URL=http://localhost:<dynamic-port>` set by Testcontainers
+- Production/Local dev: Uses default URL (can override with `VITE_API_URL`)
+- Tests: `VITE_API_URL=http://localhost:<dynamic-port>` set by test runner
 
-**Files to update:**
+**Files updated:**
 
-- `src/lib/components/features/calendar-table.svelte` - use `API_BASE_URL`
-- `src/lib/services/download-ics.ts` - use `API_BASE_URL`
+- `src/lib/components/features/calendar-table.svelte` - uses `API_BASE_URL`
+- `src/lib/services/download-ics.ts` - uses `API_BASE_URL`
 
-### 2. Testcontainers Setup
+### 2. Test Runner Script
 
-**`e2e/setup/backend-container.ts`**
+**`e2e/run-tests.ts`**
+
+The test runner orchestrates the entire test flow:
+
+1. Starts backend container with health check
+2. Backs up `.env` file (if exists)
+3. Builds frontend with `VITE_API_URL` pointing to container
+4. Runs Playwright tests
+5. Restores `.env` file
+6. Stops container
 
 ```typescript
-import { GenericContainer, StartedTestContainer } from "testcontainers";
+import { execSync } from "child_process";
+import { existsSync, renameSync, unlinkSync } from "fs";
+import { GenericContainer, Wait } from "testcontainers";
 
 const IMAGE = "ghcr.io/hochfrequenz/fristenkalender-functions:v2.1.2";
 
-let container: StartedTestContainer | null = null;
+async function main() {
+  const container = await new GenericContainer(IMAGE)
+    .withExposedPorts(80)
+    .withWaitStrategy(Wait.forHttp("/health", 80))
+    .start();
 
-export async function startBackend(): Promise<string> {
-  container = await new GenericContainer(IMAGE).withExposedPorts(80).start();
+  const backendUrl = `http://${container.getHost()}:${container.getMappedPort(80)}`;
 
-  const port = container.getMappedPort(80);
-  return `http://localhost:${port}`;
-}
-
-export async function stopBackend(): Promise<void> {
-  if (container) {
-    await container.stop();
-    container = null;
-  }
+  // Backup .env, build with container URL, run tests, restore .env
+  // ...
 }
 ```
 
-### 3. Test Fixtures
-
-**`e2e/fixtures/test-fixtures.ts`**
-
-```typescript
-import { test as base } from "@playwright/test";
-import { startBackend, stopBackend } from "../setup/backend-container";
-
-export const test = base.extend<{}, { backendUrl: string }>({
-  backendUrl: [
-    async ({}, use) => {
-      const url = await startBackend();
-      await use(url);
-      await stopBackend();
-    },
-    { scope: "worker" },
-  ],
-});
-
-export { expect } from "@playwright/test";
-```
-
-### 4. Playwright Configuration
+### 3. Playwright Configuration
 
 **`playwright.config.ts`**
 
@@ -138,65 +119,74 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: "npm run build && npm run preview",
+    command: "npm run preview",
     url: "http://localhost:4173",
     reuseExistingServer: !process.env.CI,
-    env: {
-      VITE_API_URL: process.env.VITE_API_URL || "http://localhost:7071",
-    },
   },
 });
 ```
 
-### 5. Test Scenarios
+### 4. Test Scenarios
 
 **`e2e/tests/calendar-load.spec.ts`**
 
 ```typescript
-import { test, expect } from "../fixtures/test-fixtures";
+import { expect, test } from "../fixtures/test-fixtures";
 
-test("calendar displays deadlines from backend", async ({
-  page,
-  backendUrl,
-}) => {
+test("calendar displays deadlines from backend", async ({ page }) => {
   await page.goto("/fristenkalender/");
 
-  await expect(page.locator("table")).toBeVisible();
-  await expect(page.locator("tbody tr")).not.toHaveCount(0);
+  const calendarTable = page.locator(".overflow-auto table");
+  await expect(calendarTable).toBeVisible({ timeout: 10000 });
+  await expect(calendarTable.locator("tbody tr")).not.toHaveCount(0);
 });
 
-test("calendar filters by type", async ({ page, backendUrl }) => {
+test("calendar filters by type", async ({ page }) => {
   await page.goto("/fristenkalender/?netzzugangsthemen=mabis");
 
-  await expect(page.locator("table")).toBeVisible();
+  const calendarTable = page.locator(".overflow-auto table");
+  await expect(calendarTable).toBeVisible({ timeout: 10000 });
   await expect(page).toHaveURL(/netzzugangsthemen=mabis/);
+});
+
+test("calendar navigates between months", async ({ page }) => {
+  await page.goto("/fristenkalender/");
+
+  const calendarTable = page.locator(".overflow-auto table");
+  await expect(calendarTable).toBeVisible({ timeout: 10000 });
+  await expect(page).toHaveURL(/monat=/);
 });
 ```
 
 **`e2e/tests/calendar-download.spec.ts`**
 
 ```typescript
-import { test, expect } from "../fixtures/test-fixtures";
+import { expect, test } from "../fixtures/test-fixtures";
 
-test("downloads ICS file", async ({ page, backendUrl }) => {
+test("downloads ICS file", async ({ page }) => {
   await page.goto("/fristenkalender/");
 
-  const downloadPromise = page.waitForEvent("download");
-  await page.getByRole("button", { name: /download/i }).click();
+  await expect(page.locator(".overflow-auto table")).toBeVisible({
+    timeout: 30000,
+  });
+
+  const downloadPromise = page.waitForEvent("download", { timeout: 60000 });
+  await page.getByRole("button", { name: /download jahreskalender ics/i }).click();
 
   const download = await downloadPromise;
-  expect(download.suggestedFilename()).toMatch(/Fristenkalender.*\.ics$/);
+  expect(download.suggestedFilename()).toMatch(/Hochfrequenz_Fristenkalender_\d{4}\.ics$/);
 });
 ```
 
-### 6. Dependencies & Scripts
+### 5. Dependencies & Scripts
 
 **New devDependencies:**
 
 ```json
 {
-  "@playwright/test": "^1.49.0",
-  "testcontainers": "^10.16.0"
+  "@playwright/test": "^1.57.0",
+  "testcontainers": "^11.10.0",
+  "tsx": "^4.21.0"
 }
 ```
 
@@ -204,23 +194,23 @@ test("downloads ICS file", async ({ page, backendUrl }) => {
 
 ```json
 {
-  "test:e2e": "playwright test",
-  "test:e2e:ui": "playwright test --ui"
+  "test:e2e": "npx tsx e2e/run-tests.ts"
 }
 ```
 
 ## Files Changed
 
-| File                                                | Action             |
-| --------------------------------------------------- | ------------------ |
-| `src/lib/config/api.ts`                             | Create             |
-| `src/lib/components/features/calendar-table.svelte` | Modify             |
-| `src/lib/services/download-ics.ts`                  | Modify             |
-| `playwright.config.ts`                              | Create             |
-| `e2e/setup/backend-container.ts`                    | Create             |
-| `e2e/fixtures/test-fixtures.ts`                     | Create             |
-| `e2e/tests/calendar-load.spec.ts`                   | Create             |
-| `e2e/tests/calendar-download.spec.ts`               | Create             |
-| `package.json`                                      | Modify             |
-| `.env.example`                                      | Create             |
-| `.gitignore`                                        | Modify (if needed) |
+| File                                                | Action |
+| --------------------------------------------------- | ------ |
+| `src/lib/config/api.ts`                             | Create |
+| `src/lib/components/features/calendar-table.svelte` | Modify |
+| `src/lib/services/download-ics.ts`                  | Modify |
+| `playwright.config.ts`                              | Create |
+| `e2e/run-tests.ts`                                  | Create |
+| `e2e/fixtures/test-fixtures.ts`                     | Create |
+| `e2e/tests/calendar-load.spec.ts`                   | Create |
+| `e2e/tests/calendar-download.spec.ts`               | Create |
+| `package.json`                                      | Modify |
+| `.env.example`                                      | Create |
+| `.gitignore`                                        | Modify |
+| `.github/workflows/integration-tests.yml`           | Create |

@@ -1,5 +1,5 @@
 import { execSync } from "child_process";
-import { existsSync, renameSync } from "fs";
+import { existsSync, renameSync, unlinkSync } from "fs";
 import { join } from "path";
 
 import { GenericContainer, Wait } from "testcontainers";
@@ -7,6 +7,26 @@ import { GenericContainer, Wait } from "testcontainers";
 const IMAGE = "ghcr.io/hochfrequenz/fristenkalender-functions:v2.1.2";
 const ENV_FILE = join(process.cwd(), ".env");
 const ENV_BACKUP = join(process.cwd(), ".env.backup");
+
+function backupEnvFile(): boolean {
+  // Clean up stale backup if it exists
+  if (existsSync(ENV_BACKUP)) {
+    console.log("Removing stale .env.backup file...");
+    unlinkSync(ENV_BACKUP);
+  }
+
+  const hadEnvFile = existsSync(ENV_FILE);
+  if (hadEnvFile) {
+    renameSync(ENV_FILE, ENV_BACKUP);
+  }
+  return hadEnvFile;
+}
+
+function restoreEnvFile(hadEnvFile: boolean): void {
+  if (hadEnvFile && existsSync(ENV_BACKUP)) {
+    renameSync(ENV_BACKUP, ENV_FILE);
+  }
+}
 
 async function main() {
   console.log("Starting backend container...");
@@ -23,10 +43,7 @@ async function main() {
   console.log(`Backend started at ${backendUrl}`);
 
   // Temporarily move .env so Vite uses the environment variable
-  const hadEnvFile = existsSync(ENV_FILE);
-  if (hadEnvFile) {
-    renameSync(ENV_FILE, ENV_BACKUP);
-  }
+  const hadEnvFile = backupEnvFile();
 
   try {
     console.log(`Setting VITE_API_URL=${backendUrl}`);
@@ -50,10 +67,8 @@ async function main() {
       },
     });
   } finally {
-    // Restore .env file
-    if (hadEnvFile) {
-      renameSync(ENV_BACKUP, ENV_FILE);
-    }
+    // Restore .env file (finally always executes, even on error)
+    restoreEnvFile(hadEnvFile);
     console.log("Stopping backend container...");
     await container.stop();
   }
