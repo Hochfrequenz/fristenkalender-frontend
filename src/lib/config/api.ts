@@ -1,5 +1,3 @@
-export const API_BASE_URL = import.meta.env.VITE_API_URL;
+const DEFAULT_API_URL = "https://fristenkalender.azurewebsites.net";
 
-if (!API_BASE_URL) {
-  throw new Error("VITE_API_URL environment variable is required");
-}
+export const API_BASE_URL = import.meta.env.VITE_API_URL || DEFAULT_API_URL;
