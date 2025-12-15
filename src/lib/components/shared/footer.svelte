@@ -61,8 +61,7 @@
             <a
               href="{base}/version/"
               class="hover:underline font-bold mx-1"
-              title="Frontend version"
-              >{frontendVersion}</a
+              title="Frontend version">{frontendVersion}</a
             >
           {/if}
           {#if backendVersion}

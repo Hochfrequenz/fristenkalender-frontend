@@ -2,7 +2,11 @@ import { execSync } from "child_process";
 import { existsSync, renameSync, unlinkSync } from "fs";
 import { join } from "path";
 
-import { GenericContainer, Wait, type StartedTestContainer } from "testcontainers";
+import {
+  GenericContainer,
+  Wait,
+  type StartedTestContainer,
+} from "testcontainers";
 
 const IMAGE = "ghcr.io/hochfrequenz/fristenkalender-functions:v2.1.2";
 const CONTAINER_STARTUP_TIMEOUT_MS = 60_000;

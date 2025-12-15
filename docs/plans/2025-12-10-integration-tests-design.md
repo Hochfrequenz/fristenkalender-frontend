@@ -13,11 +13,11 @@ Add integration tests to the fristenkalender-frontend using Playwright for brows
 
 ## Technical Decisions
 
-| Decision              | Choice                                                  | Rationale                                                |
-| --------------------- | ------------------------------------------------------- | -------------------------------------------------------- |
-| Test framework        | Playwright                                              | Built-in Docker support, excellent SvelteKit integration |
-| Backend orchestration | Testcontainers via wrapper script                       | Programmatic control, better test isolation              |
-| API URL config        | `VITE_API_URL` env var with default                     | Optional override, defaults to production URL            |
+| Decision              | Choice                                                                                                                                                        | Rationale                                                |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Test framework        | Playwright                                                                                                                                                    | Built-in Docker support, excellent SvelteKit integration |
+| Backend orchestration | Testcontainers via wrapper script                                                                                                                             | Programmatic control, better test isolation              |
+| API URL config        | `VITE_API_URL` env var with default                                                                                                                           | Optional override, defaults to production URL            |
 | Backend image         | [`ghcr.io/hochfrequenz/fristenkalender-functions:v2.1.2`](https://github.com/Hochfrequenz/fristenkalender-functions/pkgs/container/fristenkalender-functions) | Public registry, pinned version, CORS enabled            |
 
 ## Project Structure
@@ -171,10 +171,14 @@ test("downloads ICS file", async ({ page }) => {
   });
 
   const downloadPromise = page.waitForEvent("download", { timeout: 60000 });
-  await page.getByRole("button", { name: /download jahreskalender ics/i }).click();
+  await page
+    .getByRole("button", { name: /download jahreskalender ics/i })
+    .click();
 
   const download = await downloadPromise;
-  expect(download.suggestedFilename()).toMatch(/Hochfrequenz_Fristenkalender_\d{4}\.ics$/);
+  expect(download.suggestedFilename()).toMatch(
+    /Hochfrequenz_Fristenkalender_\d{4}\.ics$/,
+  );
 });
 ```
 
