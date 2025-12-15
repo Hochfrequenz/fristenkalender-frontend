@@ -44,6 +44,7 @@ jobs:
           ###### End of Repository/Build Configurations ######
         env:
           VITE_AUTH0_CLIENT_ID: Hku0EniRjy4B2krnx1sCwTIOzAiVta1B
+          VITE_API_URL: https://fristenkalender-api.happyfield-64ecc075.westeurope.azurecontainerapps.io
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

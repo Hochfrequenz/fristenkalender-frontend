@@ -1,5 +1,6 @@
 <script lang="ts">
   import { IconSpinner } from "$lib/components";
+  import { API_BASE_URL } from "$lib/config/api";
   import type { CalendarApiEntry } from "$lib/types/calendar-api-response";
   import type { CalendarEntry } from "$lib/types/calendar-entry";
   import type { MonthValue } from "$lib/types/calendar-month";
@@ -23,8 +24,8 @@
 
     const requestUrl =
       type === "ALL"
-        ? `https://fristenkalender.azurewebsites.net/api/GenerateAllFristen/${year}`
-        : `https://fristenkalender.azurewebsites.net/api/GenerateFristenForType/${year}/${type}`;
+        ? `${API_BASE_URL}/api/GenerateAllFristen/${year}`
+        : `${API_BASE_URL}/api/GenerateFristenForType/${year}/${type}`;
 
     const response = await fetch(requestUrl, {
       method: "GET",
