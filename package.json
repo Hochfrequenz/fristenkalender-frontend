@@ -42,7 +42,7 @@
     "svelte": "^5.46.1",
     "svelte-check": "^4.3.5",
     "tailwindcss": "^3.4.19",
-    "testcontainers": "^11.10.0",
+    "testcontainers": "^11.11.0",
     "tslib": "^2.8.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
