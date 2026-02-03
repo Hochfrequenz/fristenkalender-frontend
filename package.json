@@ -50,6 +50,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@auth0/auth0-spa-js": "^2.11.3"
+    "@auth0/auth0-spa-js": "^2.13.1"
   }
 }
