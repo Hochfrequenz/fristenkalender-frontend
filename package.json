@@ -37,7 +37,7 @@
     "postcss": "^8.5.8",
     "prettier": "^3.8.1",
     "prettier-plugin-svelte": "^3.5.1",
-    "sass": "^1.97.3",
+    "sass": "^1.99.0",
     "scss": "^0.2.4",
     "svelte": "^5.55.5",
     "svelte-check": "^4.4.6",
