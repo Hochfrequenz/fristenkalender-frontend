@@ -120,6 +120,8 @@
           href="https://github.com/Hochfrequenz/fristenkalender-frontend/"
           >Github</a
         >
+        |
+        <a class="mx-2 hover:underline" href="{base}/mcp-integration/">MCP</a>
       </p>
     </div>
   </div>
