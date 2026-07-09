@@ -10,7 +10,11 @@
   import auth from "$src/auth/authService";
   import { isAuthenticated } from "$src/store";
 
-  const exposedEndpoints = [`${base}/`, `${base}/version/`];
+  const exposedEndpoints = [
+    `${base}/`,
+    `${base}/version/`,
+    `${base}/mcp-integration/`,
+  ];
 
   onMount(async () => {
     await auth.createClient();
