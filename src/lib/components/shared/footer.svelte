@@ -127,7 +127,7 @@
           class="mx-2 hover:underline"
           target="_blank"
           rel="noopener noreferrer"
-          href="{API_BASE_URL}/docs">API-Docs</a
+          href="{API_BASE_URL}/docs">API</a
         >
       </p>
     </div>
