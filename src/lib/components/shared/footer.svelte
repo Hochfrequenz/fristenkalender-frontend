@@ -122,6 +122,13 @@
         >
         |
         <a class="mx-2 hover:underline" href="{base}/mcp-integration/">MCP</a>
+        |
+        <a
+          class="mx-2 hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="{API_BASE_URL}/docs">API-Docs</a
+        >
       </p>
     </div>
   </div>
