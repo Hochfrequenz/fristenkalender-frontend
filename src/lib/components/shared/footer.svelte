@@ -118,7 +118,16 @@
           target="_blank"
           rel="noopener noreferrer"
           href="https://github.com/Hochfrequenz/fristenkalender-frontend/"
-          >Github</a
+          >GitHub</a
+        >
+        |
+        <a class="mx-2 hover:underline" href="{base}/mcp-integration/">MCP</a>
+        |
+        <a
+          class="mx-2 hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="{API_BASE_URL}/docs">API</a
         >
       </p>
     </div>
