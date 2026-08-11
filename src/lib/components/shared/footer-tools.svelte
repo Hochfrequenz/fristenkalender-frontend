@@ -4,7 +4,9 @@
 
 <footer class="flex items-center {background}">
   <div class="flex-1 flex justify-center p-[0.5em]">
-    <div class="flex items-center text-sm text-black/70 text-center">
+    <div
+      class="flex flex-wrap items-center justify-center text-sm text-black/70 text-center"
+    >
       <a
         href="https://ahb-tabellen.hochfrequenz.de"
         target="_blank"
