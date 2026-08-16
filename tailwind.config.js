@@ -10,6 +10,7 @@ export default {
         ahb_tone: "#ebbec1",
         bedingungsbaum_primary: "#e5bd5c",
         bedingungsbaum_secondary: "#F4E2B9",
+        dolmetscher_primary: "#85cb9c",
         ebd_primary: "#8BA2D7",
         ebd_secondary: "#C2CEE9",
         fristenkalender_primary: "#abdcd3",
