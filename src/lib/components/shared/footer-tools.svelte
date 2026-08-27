@@ -4,7 +4,9 @@
 
 <footer class="flex items-center {background}">
   <div class="flex-1 flex justify-center p-[0.5em]">
-    <div class="flex items-center text-sm text-black/70 text-center">
+    <div
+      class="flex flex-wrap items-center justify-center text-sm text-black/70 text-center"
+    >
       <a
         href="https://ahb-tabellen.hochfrequenz.de"
         target="_blank"
@@ -64,6 +66,21 @@
             ease-in-out"
       >
         Entscheidungsbaumdiagramme
+      </a>
+      <a
+        href="https://mako-prozesse.hochfrequenz.de"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="font:14px/22px Roboto, sans-serif; line-height:1.5;"
+        class="flex flex-row items-center rounded-full bg-mako_primary text-white text-lg px-2 py-1 m-2
+            ring-1
+            ring-black/5
+            hover:ring-black/10
+            transition-all
+            duration-300
+            ease-in-out"
+      >
+        MaKo-Prozesse
       </a>
     </div>
   </div>
