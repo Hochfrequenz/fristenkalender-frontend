@@ -67,7 +67,7 @@ $ git tag v1.2.3 && git push origin v1.2.3       # release
 $ git submodule update --init --recursive        # needed before building locally
 $ docker build -t fristenkalender .
 $ docker run --rm -p 8080:8080 \
-    -e APP_AUTH0_CLIENT_ID=<client-id> \\
+    -e APP_AUTH0_CLIENT_ID=<client-id> \
     -e APP_API_URL=<backend-url> fristenkalender
 ```
 
