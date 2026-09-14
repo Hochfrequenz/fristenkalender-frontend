@@ -59,24 +59,33 @@ This app is deployed as a container on the self-hosted
 Azure Static Web App deployment.
 
 **Releases are cut by tagging.** Pushing a `vX.Y.Z` tag builds and pushes
-`ghcr.io/hochfrequenz/fristenkalender-frontend`; a `-rc` tag is a staging release, a plain version tag is production.
-The workflow prints the image digest to pin in the deployment repo.
+`ghcr.io/hochfrequenz/fristenkalender-frontend`; a `-rc` tag is a staging release, a plain version tag is
+production. The workflow prints the image digest to pin in the deployment repo.
 
 ```sh
-$ git tag v1.2.3 && git push origin v1.2.3      # release
-$ docker build -t fristenkalender .                       # build locally (needs submodules)
+$ git tag v1.2.3 && git push origin v1.2.3       # release
+$ git submodule update --init --recursive        # needed before building locally
+$ docker build -t fristenkalender .
 $ docker run --rm -p 8080:8080 \
-    -e APP_AUTH0_CLIENT_ID=<client-id> fristenkalender    # run locally
+    -e APP_AUTH0_CLIENT_ID=<client-id> \\
+    -e APP_API_URL=<backend-url> fristenkalender
 ```
 
-**Auth0 configuration is injected at runtime**, not baked into the bundle: the entrypoint writes
+**Configuration is injected at runtime**, not baked into the bundle: the entrypoint writes
 `/config.js` from `APP_*` environment variables and the app reads `window.__APP_CONFIG__`, falling
-back to the build-time `VITE_`/`VUE_APP_` value. That is why one image can serve both staging and
+back to the build-time `VITE_AUTH0_CLIENT_ID` value. That is why one image serves both staging and
 production, and why `npm run dev` and Cloudflare Pages previews keep working unchanged.
+
+> Note: the image is built **without** `VITE_AUTH0_CLIENT_ID`, so inside the container there is no
+> build-time fallback — if `APP_AUTH0_CLIENT_ID` is missing, login is simply broken. The compose
+> stack declares it as required, so a real deployment fails before starting.
+>
+> `APP_API_URL` matters just as much: without it the bundle falls back to a legacy backend host
+> that does not serve the version, docs or MCP endpoints.
 
 | File                           | Purpose                                                |
 | ------------------------------ | ------------------------------------------------------ |
-| `Dockerfile`                   | two-stage build: node → nginx                          |
-| `docker/nginx.conf`            | SPA serving rules: 404.html fallback, asset caching    |
+| `Dockerfile`                   | two-stage build: node 20 → nginx                       |
+| `docker/nginx.conf`            | serving rules                                          |
 | `docker/entrypoint.sh`         | renders `/config.js` from the environment              |
 | `docker/security-headers.conf` | headers included into every location that sets its own |

@@ -11,6 +11,7 @@ declare global {
     __APP_CONFIG__?: {
       auth0Domain?: string;
       auth0ClientId?: string;
+      apiUrl?: string;
     };
   }
 }
