@@ -1,0 +1,79 @@
+name: Publish container image
+
+# Cutting a release is now "tag vX.Y.Z". The image is what hf-apps-collection deploys;
+# see that repo's ADR-0009 and ADR-0014.
+#
+# Pre-release tags (vX.Y.Z-rcN) are deployed to staging; plain version tags to
+# production. Only the latter move the `latest` tag.
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push:
+    name: Build and push to GHCR
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          # The static assets live in submodules; without this the image builds but the
+          # site is missing its diagrams and company styles.
+          submodules: recursive
+
+      - name: Log in to the container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=raw,value=${{ github.ref_name }}
+            type=raw,value=latest,enable=${{ !contains(github.ref_name, '-rc') }}
+
+      - name: Build and push
+        id: push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
+
+      # hf-apps-collection pins images by digest (ADR-0014), so surface it here rather
+      # than making someone run `imagetools inspect` to find it.
+      - name: Digest to pin in hf-apps-collection
+        run: |
+          {
+            echo "### Pin this in hf-apps-collection"
+            echo
+            echo '```yaml'
+            echo "image: ${REGISTRY}/${IMAGE_NAME}:${GITHUB_REF_NAME}@${DIGEST}"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+        env:
+          DIGEST: ${{ steps.push.outputs.digest }}

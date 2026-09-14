@@ -51,3 +51,32 @@ Azure: TBD
 [fristenkalender-generator](https://github.com/Hochfrequenz/fristenkalender_generator) (backend business logic)<br>
 [fristenkalender-functions](https://github.com/Hochfrequenz/fristenkalender-functions) (backend API)<br>
 [fristenkalender-frontend-legacy](https://github.com/Hochfrequenz/fristenkalender-frontend-legacy)<br>
+
+### 🐳 Container image
+
+This app is deployed as a container on the self-hosted
+[hf-apps-collection](https://github.com/Hochfrequenz/hf-apps-collection) platform, alongside its
+Azure Static Web App deployment.
+
+**Releases are cut by tagging.** Pushing a `vX.Y.Z` tag builds and pushes
+`ghcr.io/hochfrequenz/fristenkalender-frontend`; a `-rc` tag is a staging release, a plain version tag is production.
+The workflow prints the image digest to pin in the deployment repo.
+
+```sh
+$ git tag v1.2.3 && git push origin v1.2.3      # release
+$ docker build -t fristenkalender .                       # build locally (needs submodules)
+$ docker run --rm -p 8080:8080 \
+    -e APP_AUTH0_CLIENT_ID=<client-id> fristenkalender    # run locally
+```
+
+**Auth0 configuration is injected at runtime**, not baked into the bundle: the entrypoint writes
+`/config.js` from `APP_*` environment variables and the app reads `window.__APP_CONFIG__`, falling
+back to the build-time `VITE_`/`VUE_APP_` value. That is why one image can serve both staging and
+production, and why `npm run dev` and Cloudflare Pages previews keep working unchanged.
+
+| File                           | Purpose                                                |
+| ------------------------------ | ------------------------------------------------------ |
+| `Dockerfile`                   | two-stage build: node → nginx                          |
+| `docker/nginx.conf`            | SPA serving rules: 404.html fallback, asset caching    |
+| `docker/entrypoint.sh`         | renders `/config.js` from the environment              |
+| `docker/security-headers.conf` | headers included into every location that sets its own |
