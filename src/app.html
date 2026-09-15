@@ -4,6 +4,10 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%sveltekit.assets%/favicon/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Runtime configuration, generated per environment at container start.
+         Must load before the app bundle. Why one image is configured at runtime:
+         https://github.com/Hochfrequenz/hf-apps-collection/blob/main/docs/adr/0008-one-image-runtime-configuration.md -->
+    <script src="%sveltekit.assets%/config.js"></script>
     %sveltekit.head%
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
