@@ -58,9 +58,13 @@ This app is deployed as a container on the self-hosted
 [hf-apps-collection](https://github.com/Hochfrequenz/hf-apps-collection) platform, alongside its
 Azure Static Web App deployment.
 
-**Releases are cut by tagging.** Pushing a `vX.Y.Z` tag builds and pushes
-`ghcr.io/hochfrequenz/fristenkalender-frontend`; a `-rc` tag is a staging release, a plain version tag is
-production. The workflow prints the image digest to pin in the deployment repo.
+**Releases are cut by publishing a GitHub release**, not by pushing a bare tag. The release's
+_pre-release_ checkbox decides the channel: ticked means a staging image, unticked means production
+and moves `latest`. The formatting, linting and build/e2e workflows must pass first — a release cut
+from an unprotected branch cannot skip them. The workflow prints the image digest to pin in the
+deployment repo.
+
+Image: `ghcr.io/hochfrequenz/fristenkalender-frontend`.
 
 ```sh
 $ git tag v1.2.3 && git push origin v1.2.3       # release
@@ -89,3 +93,7 @@ production, and why `npm run dev` and Cloudflare Pages previews keep working unc
 | `docker/nginx.conf`            | serving rules                                          |
 | `docker/entrypoint.sh`         | renders `/config.js` from the environment              |
 | `docker/security-headers.conf` | headers included into every location that sets its own |
+
+> **Before serving this from a new hostname**: the fristenkalender-api backend in Azure allow-lists the
+> origins it accepts. A new host (`APP_API_URL` stays the same, but the _browser's_ origin changes) must be
+> added to that allow-list, or every API call fails CORS while the page itself loads fine.

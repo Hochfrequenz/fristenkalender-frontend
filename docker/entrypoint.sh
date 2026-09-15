@@ -38,12 +38,21 @@ window.__APP_CONFIG__ = {
 };
 JS
 
-if [ -z "${APP_AUTH0_CLIENT_ID:-}" ]; then
-  # NOT "falls back to the build-time value": this image is built without
-  # VITE_AUTH0_CLIENT_ID, so there is no fallback inside the container — login is
-  # simply broken. The deployment fails closed before this point (compose declares the
-  # variable with ${VAR:?}), so reaching here means someone ran the image by hand.
-  echo "entrypoint: WARNING - APP_AUTH0_CLIENT_ID is empty; Auth0 login will not work" >&2
-fi
+# Warn for every value the container cannot fall back on. The image is built without
+# the build-time equivalents, so a missing value here is simply broken behaviour — and
+# for the backend URL it is WORSE than broken: the app silently uses a wrong default
+# rather than failing, so the container looks healthy while pointing somewhere else.
+#
+# Warn rather than exit: the deployment already fails closed (compose declares these
+# with ${VAR:?}), so reaching this code means someone is running the image by hand and
+# an abort would be unhelpful.
+warn_if_empty() {
+  eval "value=\${$1:-}"
+  [ -n "$value" ] || echo "entrypoint: WARNING - $1 is empty; $2" >&2
+}
+
+warn_if_empty APP_AUTH0_CLIENT_ID "Auth0 login will not work"
+warn_if_empty APP_AUTH0_DOMAIN "Auth0 login will not work"
+warn_if_empty APP_API_URL "the app falls back to a LEGACY backend host that does not serve /version, /docs or /mcp"
 
 exec "$@"

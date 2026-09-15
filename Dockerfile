@@ -7,7 +7,9 @@ FROM node:20-alpine AS build
 WORKDIR /app
 
 # Copy manifests first so the dependency layer is cached across source-only changes.
-COPY package.json package-lock.json ./
+# .npmrc must come along: it sets engine-strict=true, so without it this build
+# silently ignores the engines range the repo pins Node to.
+COPY package.json package-lock.json .npmrc ./
 RUN npm ci
 
 # NOTE: static/companystylesheet is a git submodule. The build context must have it
