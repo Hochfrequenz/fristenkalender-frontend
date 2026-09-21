@@ -1,5 +1,8 @@
 name: "Building"
 on:
+  # Callable so the release pipeline can gate publishing on the SAME checks CI
+  # already runs, instead of a second copy that can drift out of sync.
+  workflow_call:
   push:
     branches:
       - main
