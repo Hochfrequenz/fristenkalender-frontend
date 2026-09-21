@@ -64,15 +64,18 @@ and moves `latest`. The formatting, linting and build/e2e workflows must pass fi
 from an unprotected branch cannot skip them. The workflow prints the image digest to pin in the
 deployment repo.
 
-Image: `ghcr.io/hochfrequenz/fristenkalender-frontend`.
+Image:
+[`ghcr.io/hochfrequenz/fristenkalender-frontend`](https://github.com/Hochfrequenz/fristenkalender-frontend/pkgs/container/fristenkalender-frontend)
+(also listed under **Packages** in this repository's sidebar).
+
+Building it yourself is never necessary — the release pipeline publishes it. To run the published
+image locally:
 
 ```sh
-$ git tag v1.2.3 && git push origin v1.2.3       # release
-$ git submodule update --init --recursive        # needed before building locally
-$ docker build -t fristenkalender .
 $ docker run --rm -p 8080:8080 \
     -e APP_AUTH0_CLIENT_ID=<client-id> \
-    -e APP_API_URL=<backend-url> fristenkalender
+    -e APP_API_URL=<backend-url> \
+    ghcr.io/hochfrequenz/fristenkalender-frontend:latest
 ```
 
 **Configuration is injected at runtime**, not baked into the bundle: the entrypoint writes

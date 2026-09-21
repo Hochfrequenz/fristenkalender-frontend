@@ -1,8 +1,10 @@
 # Two-stage build: node produces the static bundle, nginx serves it.
 # See hf-apps-collection ADR-0009.
 
-# Node 20 matches what this repo's CI builds with (.github/workflows/building.yml).
-FROM node:20-alpine AS build
+# Pinned to the same minor this repo's CI builds with (.github/workflows/building.yml
+# uses node-version "20.19"), so the image is built by the Node that green-lit the code
+# (review: @hf-kklein). The patch level stays floating to keep picking up security fixes.
+FROM node:20.19-alpine AS build
 
 WORKDIR /app
 

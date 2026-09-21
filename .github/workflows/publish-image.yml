@@ -10,11 +10,15 @@ on:
     types: [published]
 
 env:
-  REGISTRY: ghcr.io
+  # One full image reference, registry included — deliberately NOT a configurable
+  # REGISTRY knob (review: @hf-kklein). Authentication below uses the built-in
+  # GITHUB_TOKEN, which is only ever valid for ghcr.io, so a registry variable would
+  # advertise a choice that does not exist.
+  #
   # Hardcoded lowercase. ${{ github.repository }} yields "Hochfrequenz/..." and OCI
   # repository names must be lowercase — metadata-action lowercases its own input, but
   # the attestation subject and any printed reference would be unpullable.
-  IMAGE_NAME: hochfrequenz/fristenkalender-frontend
+  IMAGE: ghcr.io/hochfrequenz/fristenkalender-frontend
 
 jobs:
   # Quality gate (review: @hf-kklein). Tags are not restricted to main, so a release can
@@ -59,11 +63,12 @@ jobs:
           cat static/version.json
 
       # The built-in GITHUB_TOKEN is enough to push to GHCR under this org — no PAT to
-      # create, store or rotate (review: @hf-kklein).
+      # create, store or rotate (review: @hf-kklein). It is also the reason the registry
+      # is fixed to ghcr.io: the token authenticates nowhere else.
       - name: Log in to GHCR
         uses: docker/login-action@v4
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -71,7 +76,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.IMAGE }}
           # "latest" follows the release's own pre-release flag. Deriving it from the tag
           # string missed forms like v1.2.3-beta.1, which would have moved latest onto a
           # pre-release build.
@@ -86,12 +91,15 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+          # These carry org.opencontainers.image.source, which is what makes GHCR link
+          # the package to this repository and list it in the sidebar (review:
+          # @hf-kklein) — no manual "connect repository" step in the package settings.
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v4
         with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          subject-name: ${{ env.IMAGE }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
 
@@ -103,7 +111,7 @@ jobs:
             echo "### Pin this in hf-apps-collection"
             echo
             echo '```yaml'
-            echo "image: ${REGISTRY}/${IMAGE_NAME}:${TAG}@${DIGEST}"
+            echo "image: ${IMAGE}:${TAG}@${DIGEST}"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
         env:
