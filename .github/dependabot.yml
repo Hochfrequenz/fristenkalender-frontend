@@ -18,3 +18,9 @@ updates:
     reviewers:
       - "OLILHR"
       - "@Hochfrequenz/frontend-developers-review-team"
+
+  # Keep git submodules up to date
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    schedule:
+      interval: "weekly"
