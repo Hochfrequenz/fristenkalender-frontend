@@ -98,9 +98,9 @@
       </p>
       <p class="text-black/70 text-sm opacity-70 pb-6">
         Falls Ihr KI-Tool beim Verbinden einen Fehler wie „registration failed“ oder „dynamic
-        client registration“ meldet: Aktualisieren Sie das Tool auf die aktuelle Version. Claude,
-        Claude Code (ab v2.1.81), VS Code (GitHub Copilot) und opencode verbinden sich ohne
-        Registrierung. Hilft das nicht, melden Sie sich bei uns.
+        client registration“ meldet: Aktualisieren Sie das Tool auf die aktuelle Version. Für Claude,
+        Claude Code (ab v2.1.81), VS Code (GitHub Copilot) und opencode ist keine Registrierung
+        nötig. Hilft das nicht, melden Sie sich bei uns.
       </p>
 
       <h3 class="text-lg text-black/70 pb-3">Einrichtung in Ihrem KI-Tool</h3>
