@@ -15,6 +15,7 @@ export default {
         fristenkalender_primary: "#abdcd3",
         fristenkalender_secondary: "#D4EDE8",
         fristenkalender_tone: "#73B2A5",
+        mako_primary: "#aca3e1",
         weichesschwarz: "#25241D",
       },
     },
