@@ -68,7 +68,7 @@
         Entscheidungsbaumdiagramme
       </a>
       <a
-        href="https://mako-prozesse.hochfrequenz.de"
+        href="https://mako-prozesse.hochfrequenz.app"
         target="_blank"
         rel="noopener noreferrer"
         style="font:14px/22px Roboto, sans-serif; line-height:1.5;"
