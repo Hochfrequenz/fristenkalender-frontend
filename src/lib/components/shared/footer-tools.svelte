@@ -6,7 +6,7 @@
   <div class="flex-1 flex justify-center p-[0.5em]">
     <div class="flex items-center text-sm text-black/70 text-center">
       <a
-        href="https://ahb-tabellen.hochfrequenz.de"
+        href="https://ahb-tabellen.hochfrequenz.app"
         target="_blank"
         rel="noopener noreferrer"
         style="font:14px/22px Roboto, sans-serif; line-height:1.5;"
@@ -21,7 +21,7 @@
         AHB-Tabellen
       </a>
       <a
-        href="https://fristenkalender.hochfrequenz.de"
+        href="https://fristenkalender.hochfrequenz.app"
         target="_blank"
         rel="noopener noreferrer"
         style="font:14px/22px Roboto, sans-serif; line-height:1.5;"
@@ -36,7 +36,7 @@
         Fristenkalender
       </a>
       <a
-        href="https://bedingungsbaum.hochfrequenz.de"
+        href="https://bedingungsbaum.hochfrequenz.app"
         target="_blank"
         rel="noopener noreferrer"
         style="font:14px/22px Roboto, sans-serif; line-height:1.5;"
@@ -51,7 +51,7 @@
         Bedingungsbaum
       </a>
       <a
-        href="https://ebd.hochfrequenz.de"
+        href="https://ebd.hochfrequenz.app"
         target="_blank"
         rel="noopener noreferrer"
         style="font:14px/22px Roboto, sans-serif; line-height:1.5;"

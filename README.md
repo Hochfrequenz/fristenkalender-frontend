@@ -39,7 +39,7 @@ To meet the pull request title convention [requirements](https://github.com/Hoch
 > [!NOTE]
 > During local development, authentication is currently not required. Instead, a dummy account `local@development.com` will be already logged in at both local dev server startup as well as build preview.
 
-To get past the landing page when navigating through the staging environment `https://fristenkalender.stage.hochfrequenz.de` and production environment `https://fristenkalender.hochfrequenz.de`, users need to authenticate using their Hochfrequenz login credentials.
+To get past the landing page when navigating through the staging environment `https://fristenkalender-stage.hochfrequenz.app` and production environment `https://fristenkalender.hochfrequenz.app`, users need to authenticate using their Hochfrequenz login credentials.
 
 ### 🔗 Links
 
